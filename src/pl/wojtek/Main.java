@@ -14,7 +14,16 @@ public class Main {
 
         currentNotes.addNote("My telephone", "555 555 555");
         currentNotes.addNote("Wife birthday", "01.01.1980");
-        userInterface.printNotes(defaultNotes);
+        userInterface.printNotes(currentNotes);
+
+        Notes secondNotes = new Notes();
+        currentNotes = secondNotes;
+        userInterface.printNotes(currentNotes);
+
+
+        currentNotes = defaultNotes;
+        userInterface.printNotes(currentNotes);
+
 
 
     }
