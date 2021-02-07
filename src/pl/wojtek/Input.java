@@ -43,8 +43,10 @@ public class Input {
             }
         } while (!isValueCorrect);
         return value;
-
-
     }
 
+    public String getMenuItem(){
+
+        return  scanner.nextLine();
+    }
 }
