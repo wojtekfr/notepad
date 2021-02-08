@@ -35,7 +35,7 @@ public class Input {
             value = scanner.nextLine();
             try {
                 if (value.isEmpty()) {
-                    throw new IllegalArgumentException("Value cannon be empty");
+                    throw new IllegalArgumentException("Value can not be empty");
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
