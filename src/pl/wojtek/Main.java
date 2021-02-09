@@ -17,6 +17,7 @@ public class Main {
         // test data
         currentNotes.addNote("My telephone", "555 555 555");
         currentNotes.addNote("Wife birthday", "01.01.1980");
+        currentNotes.newAnnotation("test annotation");
 
         // main loop
         Boolean needToExit = false;

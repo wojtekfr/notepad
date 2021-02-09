@@ -1,12 +1,29 @@
 package pl.wojtek;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Notes {
 
+    private String notesName;
+    private Map<String, String> notes;
+    private ArrayList<Annotation> annotations;
+
+    public ArrayList<Annotation> getAnnotations() {
+        return annotations;
+    }
+
+    public void newAnnotation(String annotationText){
+        Annotation annotation = new Annotation(annotationText);
+        annotations.add(annotation);
+    }
+
+
     public Notes(String notesName) {
         this.notesName = notesName;
+        annotations = new ArrayList<>();
+        notes = new HashMap<String, String>();
     }
 
     public Map<String, String> getNotes() {
@@ -29,7 +46,7 @@ public class Notes {
         return notes.get(key);
     }
 
-    Map<String, String> notes = new HashMap();
+
 
     public String getNotesName() {
         return notesName;
@@ -39,6 +56,6 @@ public class Notes {
         this.notesName = notesName;
     }
 
-    String notesName;
+
 
 }

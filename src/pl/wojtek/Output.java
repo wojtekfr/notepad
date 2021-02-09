@@ -7,6 +7,10 @@ public class Output {
         for (String note : notes.getNotes().keySet()) {
             System.out.println(note + "   " + notes.getSpecificNote(note));
         }
+        System.out.println("Annotations:");
+        for (Annotation annotation:notes.getAnnotations()){
+            System.out.println(annotation.toString());
+        }
     }
 
     public void showMenu() {
