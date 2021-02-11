@@ -20,10 +20,11 @@ public class Output {
         System.out.println("2 - new note");
         System.out.println("3 - edit existing note");
         System.out.println("4 - remove note");
-        System.out.println("5 - change name of current notes set");
-        System.out.println("6 - change active note set");
-        System.out.println("7 - add new note set");
-        System.out.println("8 - remove note set");
+        System.out.println("5 - calculate & show annotations length");
+        System.out.println("6 - change name of current notes set");
+        System.out.println("7 - change active note set");
+        System.out.println("8 - add new note set");
+        System.out.println("9 - remove note set");
         System.out.println("0 - exit");
     }
 

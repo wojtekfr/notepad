@@ -4,6 +4,10 @@ package pl.wojtek;
 import java.text.SimpleDateFormat;
 
 public class Annotation {
+    public String getAnnotation() {
+        return annotation;
+    }
+
     private String annotation;
     private String dateOfAdding;
 
@@ -18,6 +22,11 @@ public class Annotation {
         this.annotation = annotation;
         dateOfAdding = formatter.format(System.currentTimeMillis());
     }
+
+    public int calculateLetters(){
+       return annotation.length();
+    }
+
 
 
 }

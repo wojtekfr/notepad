@@ -1,17 +1,35 @@
 package pl.wojtek;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Input {
     Scanner scanner = new Scanner(System.in);
 
-    public String getNewKey() {
+    public String enterString(String message){
+        System.out.print("Enter " + message + " ");
+        return scanner.nextLine();
+    }
+
+    public boolean askForDecision() {
+        do {
+            System.out.println("Y / N ?");
+            String decision = scanner.nextLine().toLowerCase();
+            if (decision.equals("y")) {
+                return true;
+            } else if (decision.equals("n")) {
+                return false;
+            }
+        } while (true);
+    }
+
+    public String enterKey() {
         String key;
         Boolean isKeyCorrect;
 
         do {
             isKeyCorrect = true;
-            System.out.print("Enter new key: ");
+            System.out.print("Enter key: ");
             key = scanner.nextLine();
             try {
                 if (key.isBlank() || key.isEmpty()) {
@@ -25,13 +43,13 @@ public class Input {
         return key;
     }
 
-    public String getNewValue() {
+    public String enterValue() {
         String value;
         Boolean isValueCorrect;
 
         do {
             isValueCorrect = true;
-            System.out.print("Enter new value: ");
+            System.out.print("Enter value: ");
             value = scanner.nextLine();
             try {
                 if (value.isEmpty()) {
@@ -45,8 +63,9 @@ public class Input {
         return value;
     }
 
-    public String getMenuItem(){
 
-        return  scanner.nextLine();
+    public String getMenuItem() {
+
+        return scanner.nextLine();
     }
 }

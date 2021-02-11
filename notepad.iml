@@ -7,8 +7,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testRes" type="java-test-resource" />
     </content>
-    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit4">
         <CLASSES>
@@ -20,5 +20,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="junit:junit:4.13.1" level="project" />
+    <orderEntry type="library" exported="" name="easymock-4.2" level="project" />
+    <orderEntry type="library" exported="" name="objenesis-3.1" level="project" />
   </component>
 </module>
