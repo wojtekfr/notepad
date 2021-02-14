@@ -79,7 +79,7 @@ public class Main {
     // teraz procedury jego dotyczące muszę umieszczać w main, a procedury dotyczące
     // pozostałych elementów są w odpowiednich klasach
     public void newNotesSet() {
-        // TO DO dodać sprawdzenie unikalności nazwy
+        // TODO dodać sprawdzenie unikalności nazwy
         Input input = new Input();
         String newNotesSetName = input.enterString("Enter name of notes set");
         Notes newNoteSet = new Notes(newNotesSetName);
@@ -101,7 +101,7 @@ public class Main {
         System.out.println();
         String lookedNotesSetName = input.enterString("new notes set name");
 
-        // TO DO wydzielić sprawdzanie czy set istnieje do osobnej metody
+        // TODO wydzielić sprawdzanie czy set istnieje do osobnej metody
         boolean doesNoteSetExist = false;
         Notes lookedNotes = null;
         for (Notes notes : notesSet) {
