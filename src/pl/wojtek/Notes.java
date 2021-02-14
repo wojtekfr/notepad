@@ -48,12 +48,19 @@ public class Notes {
     }
 
 
-    public void addNewAnnotation(String annotationText) {
+    public void createNewAnnotation() {
+        Input input = new Input();
+        Annotation annotation = new Annotation(input.enterString("annotation"));
+        annotations.add(annotation);
+    }
+
+    public void createNewAnnotation(String annotationText) {
         Annotation annotation = new Annotation(annotationText);
         annotations.add(annotation);
     }
 
-    public void addNewAnnotation(Annotation annotation) {
+
+    public void addAnnotation(Annotation annotation) {
         annotations.add(annotation);
     }
 

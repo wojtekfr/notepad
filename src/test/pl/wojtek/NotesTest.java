@@ -24,8 +24,8 @@ public class NotesTest {
         expect(mockAnnotation1.calculateLetters()).andReturn(5);
         replay(mockAnnotation);
         replay(mockAnnotation1);
-        notes.addNewAnnotation(mockAnnotation);
-        notes.addNewAnnotation(mockAnnotation1);
+        notes.addAnnotation(mockAnnotation);
+        notes.addAnnotation(mockAnnotation1);
         notes.updateNumberOfLettersinAllAnnotations();
         Assert.assertEquals(notes.getNumberOfLettersInAllAnnotations(),8);
         verify(mockAnnotation);
@@ -47,7 +47,8 @@ public class NotesTest {
 
     @Test
     public void testGetAnnotations(){
-        notes.addNewAnnotation("test");
+        Annotation annotation = new Annotation("test");
+        notes.addAnnotation(annotation);
         Assert.assertEquals(notes.getAnnotations().get(notes.getAnnotations().size()-1).getAnnotation(),"test");
     }
 

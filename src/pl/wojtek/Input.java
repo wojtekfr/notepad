@@ -7,7 +7,7 @@ public class Input {
     Scanner scanner = new Scanner(System.in);
 
     public String enterString(String message){
-        System.out.print("Enter " + message + " ");
+        System.out.print("Enter " + message + " : ");
         return scanner.nextLine();
     }
 
