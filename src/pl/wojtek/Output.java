@@ -26,6 +26,8 @@ public class Output {
         System.out.println("8 - change active note set");
         System.out.println("9 - add new note set");
         System.out.println("10 - remove note set");
+        System.out.println("11 - save note set");
+        System.out.println("12 - load note set");
         System.out.println("0 - exit");
     }
 

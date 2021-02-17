@@ -11,7 +11,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Main main = new Main();
         Input input = new Input();
         Output output = new Output();
@@ -24,11 +24,13 @@ public class Main {
         currentNotes = defaultNotes;
 
         // test data
-        currentNotes.addNote("My telephone", "555 555 555");
-        currentNotes.addNote("Wife birthday", "01.01.1980");
-        currentNotes.createNewAnnotation("test annotation");
-        currentNotes.createNewAnnotation("ww");
-        currentNotes.createNewAnnotation("cc");
+//        currentNotes.addNote("inna notka", "bardzo gupia");
+//        currentNotes.addNote("My telephone", "555 555 555");
+//        currentNotes.addNote("Wife birthday", "01.01.1980");
+//        currentNotes.createNewAnnotation("super gupia anotacja");
+//        currentNotes.createNewAnnotation("test annotation");
+//        currentNotes.createNewAnnotation("ww");
+//        currentNotes.createNewAnnotation("cc");
 
         // main loop
         Boolean needToExit = false;
@@ -65,6 +67,11 @@ public class Main {
                     break;
                 case "10":
                     main.removeNotesSet();
+                case "11":
+                    currentNotes.save();
+                    break;
+                case"12":
+                    currentNotes.load();
                     break;
                 case "0":
                     System.out.println("Goodbye");
