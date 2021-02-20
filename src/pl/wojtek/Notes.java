@@ -31,6 +31,7 @@ public class Notes {
         printWriter.close();
     }
 
+
     public void load() throws Exception {
         File file = new File("notes.txt");
         Scanner scanner = new Scanner(file);

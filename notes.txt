@@ -1,0 +1,8 @@
+n%Default%f
+oinna notka%bardzo gupia
+o%My telephone%555 555 555
+o%do%zapisu
+a%super gupia anotacja%2021-02-17 at 19:31:14 CET
+a%test annotation%2021-02-17 at 19:31:14 CET
+a%ww%2021-02-17 at 19:31:14 CET
+a%cc2021-02-17 at 19:31:14 CET

@@ -1,0 +1,8 @@
+n^Default
+o^inna notka^bardzo gupia
+o^My telephone^555 555 555
+o^Wife birthday^01.01.1980
+a^super gupia anotacja^2021-02-17 at 18:47:37 CET
+a^test annotation^2021-02-17 at 18:47:37 CET
+a^ww^2021-02-17 at 18:47:37 CET
+a^cc^2021-02-17 at 18:47:37 CET

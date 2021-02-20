@@ -15,6 +15,9 @@ public class Main {
         Main main = new Main();
         Input input = new Input();
         Output output = new Output();
+        Crawler crawler = new Crawler();
+
+
 
         Notes defaultNotes = new Notes("Default");
         notesSet.add(defaultNotes);
@@ -24,13 +27,14 @@ public class Main {
         currentNotes = defaultNotes;
 
         // test data
-//        currentNotes.addNote("inna notka", "bardzo gupia");
-//        currentNotes.addNote("My telephone", "555 555 555");
-//        currentNotes.addNote("Wife birthday", "01.01.1980");
-//        currentNotes.createNewAnnotation("super gupia anotacja");
-//        currentNotes.createNewAnnotation("test annotation");
-//        currentNotes.createNewAnnotation("ww");
-//        currentNotes.createNewAnnotation("cc");
+        currentNotes.addNote("inna notka", "bardzo gupia");
+        currentNotes.addNote("My telephone", "555 555 555");
+        currentNotes.addNote("Wife birthday", "01.01.1980");
+        currentNotes.addNote("inn", "wwww");
+        currentNotes.createNewAnnotation("super gupia anotacja");
+        currentNotes.createNewAnnotation("test annotation");
+        currentNotes.createNewAnnotation("ww");
+        currentNotes.createNewAnnotation("cc");
 
         // main loop
         Boolean needToExit = false;
@@ -73,6 +77,14 @@ public class Main {
                 case"12":
                     currentNotes.load();
                     break;
+                case"13":
+                    crawler.crawl();
+                    break;
+                case"14":
+                    Search searcher = new Search(currentNotes);
+                    searcher.searchAll();
+                    break;
+
                 case "0":
                     System.out.println("Goodbye");
                     needToExit = true;

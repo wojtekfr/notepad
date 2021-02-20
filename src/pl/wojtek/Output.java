@@ -8,10 +8,11 @@ public class Output {
             System.out.println(note + "   " + notes.getSpecificNote(note));
         }
         System.out.println("Annotations:");
-        for (Annotation annotation:notes.getAnnotations()){
-            System.out.println(annotation.toString());
-        }
+//        for (Annotation annotation:notes.getAnnotations()){
+//            System.out.println(annotation.toString());
+    notes.getAnnotations().forEach(annotation -> System.out.println(annotation.toString()));
     }
+
 
     public void showMenu() {
         System.out.println();
@@ -28,6 +29,8 @@ public class Output {
         System.out.println("10 - remove note set");
         System.out.println("11 - save note set");
         System.out.println("12 - load note set");
+        System.out.println("13 - crawl");
+        System.out.println("14 - search");
         System.out.println("0 - exit");
     }
 
