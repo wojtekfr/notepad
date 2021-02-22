@@ -4,23 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearcherByKey implements Searcher {
-    private String keyToFind;
+    String keyToFind;
+    String searcherName = "search by key";
 
+    public String getSearcherName() {
+        return searcherName;
+    }
 
-    public SearcherByKey(String key) {
-        keyToFind = key;
-
+    public SearcherByKey(String keyToFind) {
+        this.keyToFind = keyToFind;
     }
 
     public List<String> findNotes(Notes notes) {
         List<String> foundKeys = new ArrayList<>();
         for (String key : notes.getNotes().keySet()) {
             if (key.contains(keyToFind)) {
-                foundKeys.add(keyToFind);
+                foundKeys.add(key);
             }
         }
-
         return foundKeys;
-
     }
 }

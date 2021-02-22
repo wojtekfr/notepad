@@ -31,6 +31,8 @@ public class Main {
         currentNotes.addNote("My telephone", "555 555 555");
         currentNotes.addNote("Wife birthday", "01.01.1980");
         currentNotes.addNote("inn", "wwww");
+        currentNotes.addNote("wife inna tel", "podwójna");
+        currentNotes.addNote("strumien", "ze strumienia");
         currentNotes.createNewAnnotation("super gupia anotacja");
         currentNotes.createNewAnnotation("test annotation");
         currentNotes.createNewAnnotation("ww");
@@ -81,8 +83,8 @@ public class Main {
                     crawler.crawl();
                     break;
                 case"14":
-                    Search searcher = new Search(currentNotes);
-                    searcher.searchAll();
+                    Search search = new Search(currentNotes);
+                    search.searchAll();
                     break;
 
                 case "0":

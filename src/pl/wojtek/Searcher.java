@@ -3,5 +3,8 @@ package pl.wojtek;
 import java.util.List;
 
 public interface Searcher {
-public List<String> findNotes (Notes notes);
+    String searcherName = null;
+
+    //public String getSearcherName();
+    public List<String> findNotes(Notes notes);
 }
