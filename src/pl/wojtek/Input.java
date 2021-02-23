@@ -65,7 +65,6 @@ public class Input {
 
 
     public String getMenuItem() {
-
         return scanner.nextLine();
     }
 }

@@ -30,9 +30,10 @@ public class Output {
         System.out.println("11 - save note set");
         System.out.println("12 - load note set");
         System.out.println("13 - crawl");
-        System.out.println("14 - search");
+        System.out.println("14 - run all searchers");
+        System.out.println("15 - show list of existing searchers");
+        System.out.println("16 - add new searcher by key");
+        System.out.println("17 - add new searcher by value");
         System.out.println("0 - exit");
     }
-
-
 }

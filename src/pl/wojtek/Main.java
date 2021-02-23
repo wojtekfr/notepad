@@ -6,37 +6,39 @@ import java.util.List;
 public class Main {
     public static Notes currentNotes;
     public static List<Notes> notesSet = new ArrayList<Notes>();
+    static Search search = new Search();
 
     public Main() {
 
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         Main main = new Main();
         Input input = new Input();
         Output output = new Output();
-        Crawler crawler = new Crawler();
 
+        Crawler crawler = new Crawler();
 
 
         Notes defaultNotes = new Notes("Default");
         notesSet.add(defaultNotes);
         currentNotes = notesSet.get(0);
-
-
-        currentNotes = defaultNotes;
+        search.setNotesForSearching(currentNotes);
+        IOOperations iOOperations = new IOOperations(currentNotes);
+        //TODO add updater after change of current set
+        //currentNotes = defaultNotes;
 
         // test data
-        currentNotes.addNote("inna notka", "bardzo gupia");
-        currentNotes.addNote("My telephone", "555 555 555");
-        currentNotes.addNote("Wife birthday", "01.01.1980");
-        currentNotes.addNote("inn", "wwww");
-        currentNotes.addNote("wife inna tel", "podwójna");
-        currentNotes.addNote("strumien", "ze strumienia");
-        currentNotes.createNewAnnotation("super gupia anotacja");
-        currentNotes.createNewAnnotation("test annotation");
-        currentNotes.createNewAnnotation("ww");
-        currentNotes.createNewAnnotation("cc");
+//        currentNotes.addNote("inna notka", "bardzo gupia");
+//        currentNotes.addNote("My telephone", "555 555 555");
+//        currentNotes.addNote("Wife birthday", "01.01.1980");
+//        currentNotes.addNote("inn", "wwww");
+//        currentNotes.addNote("wife inna tel", "podwójna");
+//        currentNotes.addNote("strumien", "ze strumienia");
+//        currentNotes.createNewAnnotation("super gupia anotacja");
+//        currentNotes.createNewAnnotation("test annotation");
+//        currentNotes.createNewAnnotation("ww");
+//        currentNotes.createNewAnnotation("cc");
 
         // main loop
         Boolean needToExit = false;
@@ -74,19 +76,26 @@ public class Main {
                 case "10":
                     main.removeNotesSet();
                 case "11":
-                    currentNotes.save();
+                    iOOperations.save();
                     break;
-                case"12":
-                    currentNotes.load();
+                case "12":
+                    iOOperations.load();
                     break;
-                case"13":
+                case "13":
                     crawler.crawl();
                     break;
-                case"14":
-                    Search search = new Search(currentNotes);
+                case "14":
                     search.searchAll();
                     break;
-
+                case "15":
+                    search.showSearchers();
+                    break;
+                case "16":
+                    search.addNewSearcherByKey();
+                    break;
+                case "17":
+                    search.addNewSearcherByValue();
+                    break;
                 case "0":
                     System.out.println("Goodbye");
                     needToExit = true;
@@ -133,6 +142,7 @@ public class Main {
         }
         if (doesNoteSetExist) {
             currentNotes = lookedNotes;
+            search.setNotesForSearching(currentNotes);
             System.out.println("Notes set chaned to " + lookedNotes.getNotesName());
         } else {
             System.out.println("No such notes found");

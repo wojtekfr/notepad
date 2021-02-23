@@ -7,14 +7,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Search {
-    //List<Searcher> searchers = new ArrayList<>();
+
     Map<String, Searcher> searchers = new HashMap<>();
+
+    public void setNotesForSearching(Notes notesForSearching) {
+        this.notesForSearching = notesForSearching;
+    }
+
     Notes notesForSearching;
 
-    public Search(Notes notes) {
-        notesForSearching = notes;
-
-
+    public Search() {
         // dodaj wyszukiwarkę zdefiniowaną w osobnej klasie
         SearcherByKey searcherByKey = new SearcherByKey("inn");
         searchers.put("searcher from normal class", searcherByKey);
@@ -58,9 +60,6 @@ public class Search {
                 .filter(note -> note.contains("wife"))
                 .map(note -> note.toUpperCase())
                 .collect(Collectors.toList()));
-
-
-
     }
 
     public void searchAll() {
@@ -73,5 +72,32 @@ public class Search {
         }
     }
 
+    public void showSearchers() {
+        for (String key : searchers.keySet()) {
+            System.out.println(key);
+        }
+    }
 
+    public void addNewSearcherByKey() {
+        Input input = new Input();
+        String searcherKey = input.enterString("Enter searcher name");
+        String searcherRule = input.enterString("Enter string to search for");
+
+        searchers.put(searcherKey, notes -> notes.getNotes().keySet().stream()
+                .filter(note -> note.contains(searcherRule))
+                .collect(Collectors.toList()));
+    }
+
+    public void addNewSearcherByValue() {
+        Input input = new Input();
+        String searcherKey = input.enterString("Enter searcher name");
+        String searcherRule = input.enterString("Enter string to search for");
+
+        searchers.put(searcherKey, notes -> notes.getNotes().values().stream()
+                .filter(note -> note.contains(searcherRule))
+                .collect(Collectors.toList()));
+    }
 }
+
+
+
