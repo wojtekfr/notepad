@@ -2,10 +2,10 @@ n%Default
 o%wife inna tel%podwójna
 o%inna notka%bardzo gupia
 o%My telephone%555 555 555
-o%Wi%fe birthday%01.01.1980
+o%Wife birthday%01.01.1980
 o%inn%wwww
 o%strumien%ze strumienia
-a%super gupia anotacja%2021-02-23 at 19:44:21 CET
-a%test annotation%2021-02-23 at 19:44:21 CET
-a%ww%20%21-02-23 at 19:44:21 CET
-a%cc%2021-02-23 at 19:44:21 CET
+a%super gupia anotacja%2021-02-26 at 20:20:55 CET
+a%test annotation%2021-02-26 at 20:20:55 CET
+a%ww%2021-02-26 at 20:20:55 CET
+a%cc%2021-02-26 at 20:20:55 CET

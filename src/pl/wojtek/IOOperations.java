@@ -1,20 +1,18 @@
 package pl.wojtek;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class IOOperations {
     Notes notes;
     String token;
 
-    public IOOperations(Notes notes) {
-        this.notes = notes;
-    }
+//    public IOOperations(Notes notes) {
+//        this.notes = notes;
+//    }
 
 
-    public void save() throws Exception {
+    public void save() throws IOException, FileNotFoundException {
         File file = new File("notes.txt");
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(file, false));
         printWriter.println("n%" + notes.getNotesName());
@@ -29,7 +27,7 @@ public class IOOperations {
     }
 
 
-    public void load() throws Exception {
+    public void load() throws IOException, FileNotFoundException {
         File file = new File("notes.txt");
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
@@ -37,21 +35,21 @@ public class IOOperations {
             if (token.charAt(0) == 'n') {
                 try {
                     readNotesName();
-                } catch (Exception e) {
+                } catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
             }
             if (token.charAt(0) == 'o') {
                 try {
                     readNote();
-                } catch (Exception e) {
+                } catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
             }
             if (token.charAt(0) == 'a') {
                 try {
                     readAnnotation();
-                } catch (Exception e) {
+                } catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
             }
@@ -59,32 +57,33 @@ public class IOOperations {
         scanner.close();
     }
 
-    public void readNotesName() {
+    public void readNotesName() throws IOException {
         String[] tokenSplitted = token.split("%");
         if (tokenSplitted.length != 2) {
-            throw new IllegalArgumentException("Incorrect name line found");
+            throw new IOException("Incorrect name line found");
         }
         notes.setNotesName(token.substring(2));
     }
 
 
-    public void readNote() {
+    public void readNote() throws IOException {
         String[] tokenSplitted = token.split("%");
         if (tokenSplitted.length != 3) {
-            throw new IllegalArgumentException("Incorrect note line found");
+            throw new IOException("Incorrect note line found");
         }
         notes.addNote(tokenSplitted[1], tokenSplitted[2]);
     }
 
 
-    public void readAnnotation() {
+    public void readAnnotation() throws IOException {
         String[] tokenSplitted = token.split("%");
         if (tokenSplitted.length != 3) {
-            throw new IllegalArgumentException("Annotation line is not correct");
+            throw new IOException("Annotation line is not correct");
         }
         notes.addAnnotation(new Annotation(tokenSplitted[1], tokenSplitted[2]));
     }
 
     public void setNotes(Notes notes) {
+        this.notes = notes;
     }
 }
