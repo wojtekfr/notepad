@@ -2,16 +2,15 @@ package pl.wojtek;
 
 import java.util.List;
 
-public class ResultsPrinter {
+public class SearchResultsPrinter {
     private String searcherKey;
     private List<String> results;
 
 
 
-    public ResultsPrinter(String searcherKey, List<String> results) {
+    public SearchResultsPrinter(String searcherKey, List<String> results) {
         this.searcherKey = searcherKey;
         this.results = results;
-
     }
 
     public void printResults() {

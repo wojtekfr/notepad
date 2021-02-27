@@ -2,45 +2,59 @@ package pl.wojtek;
 
 import java.io.IOException;
 
+// celem aplikacji jest przechowywanie notatek w dwóch formach - klucza i wartości (np do notowania ważnych dat)
+// oraz luźnych adnotacji (zwykłe pole tekstowe, dla niego dodatkowo dodawana jest automatycznie data dodana)
+// architektura aplikacji od dołu:
+// Annotation - tekst wraz z datą dodania. Reprezentowana przez obiekt klasy Annotation
+// Note - para ciągów value i key. Reprezentowana przez element w Mapie
+// Notes - obiekt klasy Notes:
+//      grupuje obiekty typu Annotation (w ramach listy_Annotations)
+//      zawiera mapę Notes przechowującą Note
+//      posiada ciąg NotesName
+// NotesSet - główny obiekt, może istnieć tylko jedna jego instancja.
+//      Pozwala przechowywać wiele notatek (Notes)
+//      Przechowuje, który obiekt Notes jest aktywny (na nim wykonywana jest większość operacji)
+//      W jego ramach tworzone są obiekty klas wykonujących operacje na nim (Search i NotesPrinter)
+//      Search i NotesSetPrinter muszą wiedzieć jaki Notes jest aktywny - więc są uaktualniane po każdej zmianie aktywnych Notes
+
+
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Main main = new Main();
         Search search = new Search();
         IOOperations iOOperations = new IOOperations();
         Input input = new Input();
-        Output output = new Output();
-        Crawler crawler = new Crawler();
+        MenuPrinter menuPrinter = new MenuPrinter();
+        NotesPrinter notesPrinter = new NotesPrinter();
 
         NotesSet notesSet = new NotesSet(search, iOOperations);
         Notes defaultNotes = new Notes("Default");
         notesSet.addNotesToSet(defaultNotes);
-        //TODO połączyć w jedną metodę
         notesSet.setCurrentNotes(defaultNotes);
-        notesSet.updateCurrentNotes();
 
         // test data
-        notesSet.getCurrentNotes().addNote("inna notka", "bardzo gupia");
+        notesSet.getCurrentNotes().addNote("inna notka", "treść inej notatki");
         notesSet.getCurrentNotes().addNote("My telephone", "555 555 555");
         notesSet.getCurrentNotes().addNote("Wife birthday", "01.01.1980");
         notesSet.getCurrentNotes().addNote("inn", "wwww");
         notesSet.getCurrentNotes().addNote("wife inna tel", "podwójna");
         notesSet.getCurrentNotes().addNote("strumien", "ze strumienia");
-        notesSet.getCurrentNotes().createNewAnnotation("super gupia anotacja");
+        notesSet.getCurrentNotes().createNewAnnotation("super głupia anotacja");
         notesSet.getCurrentNotes().createNewAnnotation("test annotation");
         notesSet.getCurrentNotes().createNewAnnotation("ww");
         notesSet.getCurrentNotes().createNewAnnotation("cc");
 
         // main loop
-        Boolean needToExit = false;
+        boolean needToExit = false;
         do {
-            output.showMenu();
+            menuPrinter.printMenu();
             switch (input.getMenuItem()) {
                 case "1":
-                    output.printNotes(notesSet.getCurrentNotes());
+                    notesPrinter.printNotes(notesSet.getCurrentNotes());
                     break;
                 case "2":
-                    notesSet.getCurrentNotes().createNewNote();
+                    notesSet.getCurrentNotes().addNewNoteEnteredByUser();
                     break;
                 case "3":
                     notesSet.getCurrentNotes().editNote();
@@ -52,11 +66,12 @@ public class Main {
                     notesSet.getCurrentNotes().createNewAnnotation();
                     break;
                 case "6":
-                    notesSet.getCurrentNotes().updateNumberOfLettersinAllAnnotations();
+                    // mało użyteczne ale dodane na potrzeby ćwiczenia tworzenia testów
+                    notesSet.getCurrentNotes().updateNumberOfLettersInAllAnnotations();
                     System.out.println(notesSet.getCurrentNotes().getNumberOfLettersInAllAnnotations());
                     break;
                 case "7":
-                    notesSet.getCurrentNotes().changeName();
+                    notesSet.changeName();
                     break;
                 case "8":
                     notesSet.changeActiveNotesSet();
@@ -73,18 +88,15 @@ public class Main {
                     iOOperations.load();
                     break;
                 case "13":
-                    crawler.crawl();
-                    break;
-                case "14":
                     search.searchAll();
                     break;
-                case "15":
+                case "14":
                     search.showSearchers();
                     break;
-                case "16":
+                case "15":
                     search.addNewSearcherByKey();
                     break;
-                case "17":
+                case "16":
                     search.addNewSearcherByValue();
                     break;
                 case "0":
@@ -92,8 +104,5 @@ public class Main {
                     needToExit = true;
             }
         } while (!needToExit);
-
-
     }
-
 }

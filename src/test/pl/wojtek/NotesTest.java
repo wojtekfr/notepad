@@ -26,7 +26,7 @@ public class NotesTest {
         replay(mockAnnotation1);
         notes.addAnnotation(mockAnnotation);
         notes.addAnnotation(mockAnnotation1);
-        notes.updateNumberOfLettersinAllAnnotations();
+        notes.updateNumberOfLettersInAllAnnotations();
         Assert.assertEquals(notes.getNumberOfLettersInAllAnnotations(),8);
         verify(mockAnnotation);
         verify(mockAnnotation1);

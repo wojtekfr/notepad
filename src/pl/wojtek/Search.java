@@ -16,7 +16,10 @@ public class Search {
 
     Notes notesForSearching;
 
+
     public Search() {
+        // predefiniowane wyszukiwarki są mało użyteczne, ale zostały dodane w celu przećwiczenia różnych sposobów ich tworzenia
+
         // dodaj wyszukiwarkę zdefiniowaną w osobnej klasie
         SearcherByKey searcherByKey = new SearcherByKey("inn");
         searchers.put("searcher from normal class", searcherByKey);
@@ -67,8 +70,8 @@ public class Search {
         for (String searcherKey : searchers.keySet()) {
             Searcher searcher = searchers.get(searcherKey);
             List<String> searchResults = searcher.findNotes(notesForSearching);
-            ResultsPrinter resultsPrinter = new ResultsPrinter(searcherKey, searchResults);
-            resultsPrinter.printResults();
+            SearchResultsPrinter searchResultsPrinter = new SearchResultsPrinter(searcherKey, searchResults);
+            searchResultsPrinter.printResults();
         }
     }
 
@@ -78,26 +81,35 @@ public class Search {
         }
     }
 
+    // dodaje wyszukiwarki stwożone przez użytkownika. Nie są one tworzone na bazie osobnej klasy ale poprzez strumień
     public void addNewSearcherByKey() {
         Input input = new Input();
-        String searcherKey = input.enterString("Enter searcher name");
-        String searcherRule = input.enterString("Enter string to search for");
+        try {
+            String searcherKey = input.enterString("Enter searcher name");
 
-        searchers.put(searcherKey, notes -> notes.getNotes().keySet().stream()
-                .filter(note -> note.contains(searcherRule))
-                .collect(Collectors.toList()));
+            String searcherRule = input.enterString("Enter string to search for");
+
+            searchers.put(searcherKey, notes -> notes.getNotes().keySet().stream()
+                    .filter(note -> note.contains(searcherRule))
+                    .collect(Collectors.toList()));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void addNewSearcherByValue() {
         Input input = new Input();
-        String searcherKey = input.enterString("Enter searcher name");
-        String searcherRule = input.enterString("Enter string to search for");
+        try {
+            String searcherKey = input.enterString("Enter searcher name");
+            String searcherRule = input.enterString("Enter string to search for");
 
-        searchers.put(searcherKey, notes -> notes.getNotes().values().stream()
-                .filter(note -> note.contains(searcherRule))
-                .collect(Collectors.toList()));
+            searchers.put(searcherKey, notes -> notes.getNotes().values().stream()
+                    .filter(note -> note.contains(searcherRule))
+                    .collect(Collectors.toList()));
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
-
 
 

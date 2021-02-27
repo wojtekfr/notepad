@@ -5,7 +5,7 @@ o%My telephone%555 555 555
 o%Wife birthday%01.01.1980
 o%inn%wwww
 o%strumien%ze strumienia
-a%super gupia anotacja%2021-02-26 at 20:20:55 CET
-a%test annotation%2021-02-26 at 20:20:55 CET
-a%ww%2021-02-26 at 20:20:55 CET
-a%cc%2021-02-26 at 20:20:55 CET
+a%super gupia anotacja%2021-02-27 at 18:36:29 CET
+a%test annotation%2021-02-27 at 18:36:29 CET
+a%ww%2021-02-27 at 18:36:29 CET
+a%cc%2021-02-27 at 18:36:29 CET

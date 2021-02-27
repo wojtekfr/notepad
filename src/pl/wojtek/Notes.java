@@ -1,21 +1,16 @@
 package pl.wojtek;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Notes {
-
 
     private String notesName;
     private Map<String, String> notes;
     private ArrayList<Annotation> annotations;
-    Input input = new Input();
-
-
     private int numberOfLettersInAllAnnotations;
+    Input input = new Input();
 
     public Notes(String notesName) {
         this.notesName = notesName;
@@ -23,25 +18,12 @@ public class Notes {
         notes = new HashMap<String, String>();
     }
 
-
-
-    public void changeName() {
-        System.out.println("Current name: " + this.getNotesName());
-        String name = input.enterString("new name");
-        if (name.isEmpty()) {
-            System.out.println("Name not changed");
-            return;
-        } else {
-            this.setNotesName(name);
-        }
-    }
-
     public int getNumberOfLettersInAllAnnotations() {
         return numberOfLettersInAllAnnotations;
     }
 
 
-    public void updateNumberOfLettersinAllAnnotations() {
+    public void updateNumberOfLettersInAllAnnotations() {
         int numberOfLetters = 0;
         for (Annotation annotation : annotations) {
             numberOfLetters += annotation.calculateLetters();
@@ -53,11 +35,14 @@ public class Notes {
         return annotations;
     }
 
-
     public void createNewAnnotation() {
-        Input input = new Input();
-        Annotation annotation = new Annotation(input.enterString("annotation"));
-        annotations.add(annotation);
+        try {
+            Input input = new Input();
+            Annotation annotation = new Annotation(input.enterString("annotation"));
+            annotations.add(annotation);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void createNewAnnotation(String annotationText) {
@@ -65,11 +50,9 @@ public class Notes {
         annotations.add(annotation);
     }
 
-
     public void addAnnotation(Annotation annotation) {
         annotations.add(annotation);
     }
-
 
     public Map<String, String> getNotes() {
         return notes;
@@ -79,8 +62,7 @@ public class Notes {
         this.notes = notes;
     }
 
-    public void createNewNote() {
-        Input input = new Input();
+    public void addNewNoteEnteredByUser() {
         notes.put(input.enterKey(), input.enterValue());
     }
 
@@ -96,8 +78,8 @@ public class Notes {
             return;
         }
         System.out.println("Do you really whant to remove note: " + key + " " + notes.get(key));
-        boolean deceision = input.askForDecision();
-        if (deceision) {
+        boolean decision = input.askForDecision();
+        if (decision) {
             notes.remove(key);
             System.out.println("Note removed");
         } else {
