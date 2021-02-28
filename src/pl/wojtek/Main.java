@@ -23,27 +23,28 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Search search = new Search();
-        IOOperations iOOperations = new IOOperations();
+
         Input input = new Input();
         MenuPrinter menuPrinter = new MenuPrinter();
         NotesPrinter notesPrinter = new NotesPrinter();
 
-        NotesSet notesSet = new NotesSet(search, iOOperations);
+        NotesSets notesSets = new NotesSets(search);
         Notes defaultNotes = new Notes("Default");
-        notesSet.addNotesToSet(defaultNotes);
-        notesSet.setCurrentNotes(defaultNotes);
+        notesSets.addNotesToSet(defaultNotes);
+        IOOperations iOOperations = new IOOperations(notesSets);
+        notesSets.setCurrentNotes(defaultNotes);
 
         // test data
-        notesSet.getCurrentNotes().addNote("inna notka", "treść inej notatki");
-        notesSet.getCurrentNotes().addNote("My telephone", "555 555 555");
-        notesSet.getCurrentNotes().addNote("Wife birthday", "01.01.1980");
-        notesSet.getCurrentNotes().addNote("inn", "wwww");
-        notesSet.getCurrentNotes().addNote("wife inna tel", "podwójna");
-        notesSet.getCurrentNotes().addNote("strumien", "ze strumienia");
-        notesSet.getCurrentNotes().createNewAnnotation("super głupia anotacja");
-        notesSet.getCurrentNotes().createNewAnnotation("test annotation");
-        notesSet.getCurrentNotes().createNewAnnotation("ww");
-        notesSet.getCurrentNotes().createNewAnnotation("cc");
+        notesSets.getCurrentNotes().addNote("inna notka", "treść inej notatki");
+        notesSets.getCurrentNotes().addNote("My telephone", "555 555 555");
+        notesSets.getCurrentNotes().addNote("Wife birthday", "01.01.1980");
+        notesSets.getCurrentNotes().addNote("inn", "wwww");
+        notesSets.getCurrentNotes().addNote("wife inna tel", "podwójna");
+        notesSets.getCurrentNotes().addNote("strumien", "ze strumienia");
+        notesSets.getCurrentNotes().createNewAnnotation("super głupia anotacja");
+        notesSets.getCurrentNotes().createNewAnnotation("test annotation");
+        notesSets.getCurrentNotes().createNewAnnotation("ww");
+        notesSets.getCurrentNotes().createNewAnnotation("cc");
 
         // main loop
         boolean needToExit = false;
@@ -51,36 +52,36 @@ public class Main {
             menuPrinter.printMenu();
             switch (input.getMenuItem()) {
                 case "1":
-                    notesPrinter.printNotes(notesSet.getCurrentNotes());
+                    notesPrinter.printNotes(notesSets.getCurrentNotes());
                     break;
                 case "2":
-                    notesSet.getCurrentNotes().addNewNoteEnteredByUser();
+                    notesSets.getCurrentNotes().addNewNoteEnteredByUser();
                     break;
                 case "3":
-                    notesSet.getCurrentNotes().editNote();
+                    notesSets.getCurrentNotes().editNote();
                     break;
                 case "4":
-                    notesSet.getCurrentNotes().removeNote();
+                    notesSets.getCurrentNotes().removeNote();
                     break;
                 case "5":
-                    notesSet.getCurrentNotes().createNewAnnotation();
+                    notesSets.getCurrentNotes().createNewAnnotation();
                     break;
                 case "6":
                     // mało użyteczne ale dodane na potrzeby ćwiczenia tworzenia testów
-                    notesSet.getCurrentNotes().updateNumberOfLettersInAllAnnotations();
-                    System.out.println(notesSet.getCurrentNotes().getNumberOfLettersInAllAnnotations());
+                    notesSets.getCurrentNotes().updateNumberOfLettersInAllAnnotations();
+                    System.out.println(notesSets.getCurrentNotes().getNumberOfLettersInAllAnnotations());
                     break;
                 case "7":
-                    notesSet.changeName();
+                    notesSets.changeName();
                     break;
                 case "8":
-                    notesSet.changeActiveNotesSet();
+                    notesSets.changeActiveNotesSet();
                     break;
                 case "9":
-                    notesSet.newNotesSet();
+                    notesSets.newNotesSet();
                     break;
                 case "10":
-                    notesSet.removeNotesSet();
+                    notesSets.removeNotesSet();
                 case "11":
                     iOOperations.save();
                     break;

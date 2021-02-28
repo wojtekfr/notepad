@@ -3,17 +3,17 @@ package pl.wojtek;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesSet {
-    private List<Notes> notesSet = new ArrayList<Notes>();
+public class NotesSets {
+    private List<Notes> notesList = new ArrayList<Notes>();
     private Notes currentNotes;
     Input input = new Input();
     NotesSetPrinter notesSetPrinter = new NotesSetPrinter();
     private Search search;
     private IOOperations iOOperations;
 
-    public NotesSet(Search search, IOOperations iOOperations) {
+    public NotesSets(Search search) {
         this.search = search;
-        this.iOOperations = iOOperations;
+        //this.iOOperations = iOOperations;
     }
 
     public Notes getCurrentNotes() {
@@ -23,23 +23,23 @@ public class NotesSet {
     public void setCurrentNotes(Notes currentNotes) {
         this.currentNotes = currentNotes;
         search.setNotesForSearching(currentNotes);
-        iOOperations.setNotes(currentNotes);
+        //iOOperations.setNotesSet(this);
     }
 
-    public List<Notes> getNotesSet() {
-        return notesSet;
+    public List<Notes> getNotesList() {
+        return notesList;
     }
 
-    public void setNotesSet(List<Notes> notesSet) {
-        this.notesSet = notesSet;
+    public void setNotesList(List<Notes> notesList) {
+        this.notesList = notesList;
     }
 
     public void addNotesToSet(Notes notes) {
-        notesSet.add(notes);
+        notesList.add(notes);
     }
 
     public void removeNotesFromSet(Notes notes) {
-        notesSet.remove(notes);
+        notesList.remove(notes);
     }
 
     public void newNotesSet() {
@@ -49,7 +49,7 @@ public class NotesSet {
                 System.out.println("Such name already exists");
             } else {
                 Notes newNoteSet = new Notes(newNotesSetName);
-                notesSet.add(newNoteSet);
+                notesList.add(newNoteSet);
                 System.out.println(newNotesSetName + " added");
             }
         } catch (IllegalArgumentException e) {
@@ -93,7 +93,7 @@ public class NotesSet {
 
     public boolean doesNoteSetExist(String proposedNotesSetName) {
 
-        for (Notes notes : notesSet) {
+        for (Notes notes : notesList) {
             if (notes.getNotesName().equals(proposedNotesSetName)) {
                 return true;
             }
@@ -102,7 +102,7 @@ public class NotesSet {
     }
 
     public Notes findNotesSet(String lookedNotesSetName) {
-        for (Notes notes : notesSet) {
+        for (Notes notes : notesList) {
             if (notes.getNotesName().equals(lookedNotesSetName)) {
                 return notes;
             }
@@ -120,7 +120,7 @@ public class NotesSet {
             if (currentNotes == foundNotes) {
                 System.out.println("You can't remove current notes set");
             } else if (foundNotes != null) {
-                notesSet.remove(foundNotes);
+                notesList.remove(foundNotes);
                 System.out.println(toRemoveNotesSetName + " removed");
             } else {
                 System.out.println("No such notes found");
