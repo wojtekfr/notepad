@@ -14,37 +14,41 @@ import java.io.IOException;
 // NotesSet - główny obiekt, może istnieć tylko jedna jego instancja.
 //      Pozwala przechowywać wiele notatek (Notes)
 //      Przechowuje, który obiekt Notes jest aktywny (na nim wykonywana jest większość operacji)
-//      W jego ramach tworzone są obiekty klas wykonujących operacje na nim (Search i NotesPrinter)
-//      Search i NotesSetPrinter muszą wiedzieć jaki Notes jest aktywny - więc są uaktualniane po każdej zmianie aktywnych Notes
-
-
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Search search = new Search();
-
+        // tworzy niezbędne obiekty wykorzystywanych klas
         Input input = new Input();
         MenuPrinter menuPrinter = new MenuPrinter();
-        NotesPrinter notesPrinter = new NotesPrinter();
 
-        NotesSets notesSets = new NotesSets(search);
+        // tworzy jedyną instancję NotesSet
+        NotesSet notesSet = new NotesSet();
+
+        // tworzy pierwszą instancję Notes - aplikacja musi mieć przynajmniej jedną
         Notes defaultNotes = new Notes("Default");
-        notesSets.addNotesToSet(defaultNotes);
-        IOOperations iOOperations = new IOOperations(notesSets);
-        notesSets.setCurrentNotes(defaultNotes);
+        notesSet.addNotesToSet(defaultNotes);
+
+        // iOOperations działa zawsze na całym NotesSet więc tworzony jest dopiero tutaj, podając notesSet w konstruktorze
+        IOOperations iOOperations = new IOOperations(notesSet);
+
+        // Dla prawidłowego działania funkcji pracujących na konkretnym zbiorze notatek i adnotacji (instancja obiektu Notes)
+        // niezbędne jest zdefiniowanie bieżacych notatek.
+        notesSet.setCurrentNotes(defaultNotes);
 
         // test data
-        notesSets.getCurrentNotes().addNote("inna notka", "treść inej notatki");
-        notesSets.getCurrentNotes().addNote("My telephone", "555 555 555");
-        notesSets.getCurrentNotes().addNote("Wife birthday", "01.01.1980");
-        notesSets.getCurrentNotes().addNote("inn", "wwww");
-        notesSets.getCurrentNotes().addNote("wife inna tel", "podwójna");
-        notesSets.getCurrentNotes().addNote("strumien", "ze strumienia");
-        notesSets.getCurrentNotes().createNewAnnotation("super głupia anotacja");
-        notesSets.getCurrentNotes().createNewAnnotation("test annotation");
-        notesSets.getCurrentNotes().createNewAnnotation("ww");
-        notesSets.getCurrentNotes().createNewAnnotation("cc");
+        notesSet.getCurrentNotes().addNote("inna notka", "treść inej notatki");
+        notesSet.getCurrentNotes().addNote("My telephone", "555 555 555");
+        notesSet.getCurrentNotes().addNote("Wife birthday", "01.01.1980");
+        notesSet.getCurrentNotes().addNote("inn", "wwww");
+        notesSet.getCurrentNotes().addNote("wife inna tel", "podwójna");
+        notesSet.getCurrentNotes().addNote("strumien", "ze strumienia");
+        notesSet.getCurrentNotes().createNewAnnotation("super głupia anotacja");
+        notesSet.getCurrentNotes().createNewAnnotation("test annotation");
+        notesSet.getCurrentNotes().createNewAnnotation("ww");
+        notesSet.getCurrentNotes().createNewAnnotation("cc");
+
+
 
         // main loop
         boolean needToExit = false;
@@ -52,36 +56,43 @@ public class Main {
             menuPrinter.printMenu();
             switch (input.getMenuItem()) {
                 case "1":
-                    notesPrinter.printNotes(notesSets.getCurrentNotes());
+                    notesSet.getCurrentNotes().printNotes();
                     break;
                 case "2":
-                    notesSets.getCurrentNotes().addNewNoteEnteredByUser();
+                    // tu mam zgryz. Żeby z maina wywołać metodę na konretnej instancji Notes, muszę najpierw pobrać tą instancję z notesSet
+                    // pytanie czy to eleganckie rozwiązanie. Z poziomu maina pewnie byłoby lepiej mieć tą metodę w notesSet, która by przekazywała
+                    // polecenie druku, niżej, do konkretnej instancji Notes. Ale to by powodowało koniecznośc posiadania w notesSet zestawu metod,
+                    // które nic nie robią, poza wywołaniem tej samej metody niżej (w Notes).
+                    // Zrobiłem tak za to, w Notes dla Search i NotesPrinter, bo tam żeby wywołać drukowanie z main, trzeba by
+                    // pobrać instancję Notes z NotesSet, a potem dla tego Notes, pobrać NotesPrinter - to już za długi łańcuszek.
+                    // ale nie wygląda mi to na zgrabne rozwiązanie, więc pewnie jest lepszy sposób
+                    notesSet.getCurrentNotes().addNewNoteEnteredByUser();
                     break;
                 case "3":
-                    notesSets.getCurrentNotes().editNote();
+                    notesSet.getCurrentNotes().editNote();
                     break;
                 case "4":
-                    notesSets.getCurrentNotes().removeNote();
+                    notesSet.getCurrentNotes().removeNote();
                     break;
                 case "5":
-                    notesSets.getCurrentNotes().createNewAnnotation();
+                    notesSet.getCurrentNotes().createNewAnnotation();
                     break;
                 case "6":
                     // mało użyteczne ale dodane na potrzeby ćwiczenia tworzenia testów
-                    notesSets.getCurrentNotes().updateNumberOfLettersInAllAnnotations();
-                    System.out.println(notesSets.getCurrentNotes().getNumberOfLettersInAllAnnotations());
+                    notesSet.getCurrentNotes().updateNumberOfLettersInAllAnnotations();
+                    System.out.println(notesSet.getCurrentNotes().getNumberOfLettersInAllAnnotations());
                     break;
                 case "7":
-                    notesSets.changeName();
+                    notesSet.changeName();
                     break;
                 case "8":
-                    notesSets.changeActiveNotesSet();
+                    notesSet.changeActiveNotesSet();
                     break;
                 case "9":
-                    notesSets.newNotesSet();
+                    notesSet.newNotesSet();
                     break;
                 case "10":
-                    notesSets.removeNotesSet();
+                    notesSet.removeNotesSet();
                 case "11":
                     iOOperations.save();
                     break;
@@ -89,16 +100,16 @@ public class Main {
                     iOOperations.load();
                     break;
                 case "13":
-                    search.searchAll();
+                    notesSet.getCurrentNotes().searchAll();
                     break;
                 case "14":
-                    search.showSearchers();
+                    notesSet.getCurrentNotes().showSearchers();
                     break;
                 case "15":
-                    search.addNewSearcherByKey();
+                    notesSet.getCurrentNotes().addNewSearcherByKey();
                     break;
                 case "16":
-                    search.addNewSearcherByValue();
+                    notesSet.getCurrentNotes().addNewSearcherByValue();
                     break;
                 case "0":
                     System.out.println("Goodbye");

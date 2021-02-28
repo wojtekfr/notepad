@@ -3,18 +3,12 @@ package pl.wojtek;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesSets {
+public class NotesSet {
     private List<Notes> notesList = new ArrayList<Notes>();
     private Notes currentNotes;
-    Input input = new Input();
-    NotesSetPrinter notesSetPrinter = new NotesSetPrinter();
-    private Search search;
-    private IOOperations iOOperations;
+    private Input input = new Input();
+    private NotesSetPrinter notesSetPrinter = new NotesSetPrinter();
 
-    public NotesSets(Search search) {
-        this.search = search;
-        //this.iOOperations = iOOperations;
-    }
 
     public Notes getCurrentNotes() {
         return currentNotes;
@@ -22,8 +16,6 @@ public class NotesSets {
 
     public void setCurrentNotes(Notes currentNotes) {
         this.currentNotes = currentNotes;
-        search.setNotesForSearching(currentNotes);
-        //iOOperations.setNotesSet(this);
     }
 
     public List<Notes> getNotesList() {

@@ -4,14 +4,14 @@ import java.io.*;
 import java.util.Scanner;
 
 public class IOOperations {
-    NotesSets notesSets;
+    NotesSet notesSet;
     String token;
     Input input = new Input();
     File file = new File("notes.txt");
     String[] tokenSplitted;
 
-    public IOOperations(NotesSets notesSets) {
-        this.notesSets = notesSets;
+    public IOOperations(NotesSet notesSet) {
+        this.notesSet = notesSet;
     }
 
     public void save() throws IOException {
@@ -20,7 +20,7 @@ public class IOOperations {
 
             PrintWriter printWriter = new PrintWriter(new FileOutputStream(file, false));
 
-            for (Notes notes : notesSets.getNotesList()) {
+            for (Notes notes : notesSet.getNotesList()) {
                 printWriter.println("n%" + notes.getNotesName());
                 for (String note : notes.getNotes().keySet()) {
                     printWriter.println("o%" + note + "%" + notes.getSpecificNote(note));
@@ -41,7 +41,7 @@ public class IOOperations {
                 if (!checkIfFileContainsAnyNotesSet()) {
                     System.out.println("File notes.txt does not contain any correct notes sets");
                 } else {
-                    notesSets.getNotesList().clear();
+                    notesSet.getNotesList().clear();
                     Scanner scanner = new Scanner(file);
                     while (scanner.hasNext()) {
                         token = scanner.nextLine();
@@ -100,8 +100,8 @@ public class IOOperations {
             throw new IOException("Incorrect name line found");
         }
         Notes notesToAdd = new Notes(token.substring(2));
-        notesSets.addNotesToSet(notesToAdd);
-        notesSets.setCurrentNotes(notesToAdd);
+        notesSet.addNotesToSet(notesToAdd);
+        notesSet.setCurrentNotes(notesToAdd);
     }
 
 
@@ -109,7 +109,7 @@ public class IOOperations {
         if (tokenSplitted.length != 3) {
             throw new IOException("Incorrect note line found");
         }
-        notesSets.getCurrentNotes().addNote(tokenSplitted[1], tokenSplitted[2]);
+        notesSet.getCurrentNotes().addNote(tokenSplitted[1], tokenSplitted[2]);
     }
 
 
@@ -117,6 +117,6 @@ public class IOOperations {
         if (tokenSplitted.length != 3) {
             throw new IOException("Annotation line is not correct");
         }
-        notesSets.getCurrentNotes().addAnnotation(new Annotation(tokenSplitted[1], tokenSplitted[2]));
+        notesSet.getCurrentNotes().addAnnotation(new Annotation(tokenSplitted[1], tokenSplitted[2]));
     }
 }

@@ -9,15 +9,12 @@ import java.util.stream.Collectors;
 public class Search {
 
     Map<String, Searcher> searchers = new HashMap<>();
-
-    public void setNotesForSearching(Notes notesForSearching) {
-        this.notesForSearching = notesForSearching;
-    }
-
     Notes notesForSearching;
 
 
-    public Search() {
+
+    public Search(Notes notesForSearching) {
+        this.notesForSearching = notesForSearching;
         // predefiniowane wyszukiwarki są mało użyteczne, ale zostały dodane w celu przećwiczenia różnych sposobów ich tworzenia
 
         // dodaj wyszukiwarkę zdefiniowaną w osobnej klasie

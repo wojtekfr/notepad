@@ -11,6 +11,9 @@ public class Notes {
     private ArrayList<Annotation> annotations;
     private int numberOfLettersInAllAnnotations;
     Input input = new Input();
+    NotesPrinter notesPrinter = new NotesPrinter(this);
+    Search search = new Search(this);
+
 
     public Notes(String notesName) {
         this.notesName = notesName;
@@ -109,4 +112,27 @@ public class Notes {
         }
         notes.put(key, input.enterValue());
     }
+
+// metody poniżej służą tylko skaskadowaniu poleceń dotyczących wyszukiwania lub drukowania do instancji Search albo NotesPrinter
+    public void searchAll() {
+        search.searchAll();
+    }
+
+    public void showSearchers() {
+        search.showSearchers();
+    }
+
+    public void addNewSearcherByKey() {
+        search.addNewSearcherByKey();
+    }
+
+    public void addNewSearcherByValue() {
+        search.addNewSearcherByValue();
+    }
+
+    public void printNotes() {
+        notesPrinter.printNotes();
+    }
+
+
 }

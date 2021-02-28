@@ -1,12 +1,24 @@
 package pl.wojtek;
 
 public class NotesPrinter {
-    public void printNotes(Notes notes) {
-        System.out.println("Your notes in " + notes.getNotesName() + " :");
-        for (String note : notes.getNotes().keySet()) {
-            System.out.println(note + "   " + notes.getSpecificNote(note));
+    Notes notesForPrinting;
+
+    public NotesPrinter(Notes notesForPrinting) {
+        this.notesForPrinting = notesForPrinting;
+    }
+
+    public void setNotesForPrinting(Notes notesForPrinting) {
+        this.notesForPrinting = notesForPrinting;
+    }
+
+
+
+    public void printNotes() {
+        System.out.println("Your notes in " + notesForPrinting.getNotesName() + " :");
+        for (String note : notesForPrinting.getNotes().keySet()) {
+            System.out.println(note + "   " + notesForPrinting.getSpecificNote(note));
         }
         System.out.println("Annotations:");
-        notes.getAnnotations().forEach(annotation -> System.out.println(annotation.toString()));
+        notesForPrinting.getAnnotations().forEach(annotation -> System.out.println(annotation.toString()));
     }
 }
