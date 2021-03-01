@@ -113,7 +113,7 @@ public class Notes {
         notes.put(key, input.enterValue());
     }
 
-// metody poniżej służą tylko skaskadowaniu poleceń dotyczących wyszukiwania lub drukowania do instancji Search albo NotesPrinter
+    // metody poniżej służą tylko skaskadowaniu poleceń dotyczących wyszukiwania lub drukowania do instancji Search albo NotesPrinter
     public void searchAll() {
         search.searchAll();
     }

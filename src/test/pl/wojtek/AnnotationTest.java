@@ -7,7 +7,7 @@ import org.junit.Test;
 public class AnnotationTest {
 
     Annotation testAnnotation = new Annotation("test");
-
+    Annotation testAnnotationWithLongConstructor = new Annotation("tekst", "data");
 
 
     @Test
@@ -16,8 +16,18 @@ public class AnnotationTest {
     }
 
     @Test
-    public void testCalculateLetters(){
-        Assert.assertEquals(testAnnotation.calculateLetters(),4);
+    public void testCalculateLetters() {
+        Assert.assertEquals(testAnnotation.calculateLetters(), 4);
     }
 
+    @Test
+    public void testGetFromAnnotationWithLongConstructor() {
+        Assert.assertEquals(testAnnotationWithLongConstructor.getDateOfAdding(), "data");
+        Assert.assertEquals(testAnnotationWithLongConstructor.getAnnotation(),"tekst");
+    }
+
+    @Test
+    public void testTestToString() {
+        Assert.assertEquals(testAnnotationWithLongConstructor.toString(),"tekst data");
+    }
 }

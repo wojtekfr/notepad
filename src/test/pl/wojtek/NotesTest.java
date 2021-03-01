@@ -4,11 +4,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.easymock.EasyMock.*;
 
 public class NotesTest {
     Notes notes;
     Annotation mockAnnotation, mockAnnotation1;
+    Input mockInput;
 
     @Before
     public void initTests(){
@@ -16,6 +20,7 @@ public class NotesTest {
 
         mockAnnotation = mock (Annotation.class);
         mockAnnotation1 = mock(Annotation.class);
+        mockInput = mock(Input.class);
     }
 
     @Test
@@ -52,4 +57,18 @@ public class NotesTest {
         Assert.assertEquals(notes.getAnnotations().get(notes.getAnnotations().size()-1).getAnnotation(),"test");
     }
 
+    @Test
+    public void testCreateNewAnnotation() {
+    notes.createNewAnnotation("testowa");
+    Assert.assertEquals(notes.getAnnotations().get(0).getAnnotation(),"testowa");
+    }
+
+    @Test
+    public void testGetNotes() {
+        Map<String, String> map = new HashMap<>();
+        map.put("aa","bb");
+        notes.setNotes(map);
+        Map<String, String> map2 = new HashMap<>();
+        Assert.assertEquals(notes.getNotes(), map);
+    }
 }

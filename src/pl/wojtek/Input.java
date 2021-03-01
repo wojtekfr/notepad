@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Input {
     Scanner scanner = new Scanner(System.in);
+
+
     // znak % jest używany jako znacznik przy zapisywaniu plików więc nie jest dopuszczalny do wproadzenia
     String notAllowedSymbolMessage = "% symbol is not allowed";
 
