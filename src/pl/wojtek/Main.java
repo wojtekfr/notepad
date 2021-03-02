@@ -1,6 +1,7 @@
 package pl.wojtek;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 // celem aplikacji jest przechowywanie notatek w dwóch formach - klucza i wartości (np do notowania ważnych dat)
 // oraz luźnych adnotacji (zwykłe pole tekstowe, dla niego dodatkowo dodawana jest automatycznie data dodana)
@@ -19,7 +20,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         // tworzy niezbędne obiekty wykorzystywanych klas
-        Input input = new Input();
+        Input input = new Input(System.in);
+        Scanner scanner = new Scanner(System.in);
         MenuPrinter menuPrinter = new MenuPrinter();
 
         // tworzy jedyną instancję NotesSet
@@ -54,7 +56,7 @@ public class Main {
         boolean needToExit = false;
         do {
             menuPrinter.printMenu();
-            switch (input.getMenuItem()) {
+            switch (input.getMenuItem(scanner)) {
                 case "1":
                     notesSet.getCurrentNotes().printNotes();
                     break;
@@ -75,7 +77,7 @@ public class Main {
                     notesSet.getCurrentNotes().removeNote();
                     break;
                 case "5":
-                    notesSet.getCurrentNotes().createNewAnnotation();
+                    notesSet.getCurrentNotes().createNewAnnotation(input);
                     break;
                 case "6":
                     // mało użyteczne ale dodane na potrzeby ćwiczenia tworzenia testów

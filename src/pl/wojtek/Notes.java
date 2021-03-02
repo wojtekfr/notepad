@@ -10,10 +10,19 @@ public class Notes {
     private Map<String, String> notes;
     private ArrayList<Annotation> annotations;
     private int numberOfLettersInAllAnnotations;
-    Input input = new Input();
+
+    Input input = new Input(System.in);
     NotesPrinter notesPrinter = new NotesPrinter(this);
     Search search = new Search(this);
 
+
+    // te dwa setery tylko na potrzeby podmiany inputa i seracha na mocki w testach
+    public void setInput(Input input) {
+        this.input = input;
+    }
+    public void setSearch(Search search) {
+        this.search = search;
+    }
 
     public Notes(String notesName) {
         this.notesName = notesName;
@@ -38,9 +47,8 @@ public class Notes {
         return annotations;
     }
 
-    public void createNewAnnotation() {
+    public void createNewAnnotation(Input input) {
         try {
-            Input input = new Input();
             Annotation annotation = new Annotation(input.enterString("annotation"));
             annotations.add(annotation);
         } catch (IllegalArgumentException e) {
@@ -49,8 +57,12 @@ public class Notes {
     }
 
     public void createNewAnnotation(String annotationText) {
+        if (annotationText.contains("%")) {
+            throw new IllegalArgumentException();
+        }
         Annotation annotation = new Annotation(annotationText);
         annotations.add(annotation);
+
     }
 
     public void addAnnotation(Annotation annotation) {

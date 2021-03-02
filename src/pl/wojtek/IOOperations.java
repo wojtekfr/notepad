@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class IOOperations {
     NotesSet notesSet;
     String token;
-    Input input = new Input();
+    Input input = new Input(System.in);
     File file = new File("notes.txt");
     String[] tokenSplitted;
 

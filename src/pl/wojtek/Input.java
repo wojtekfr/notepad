@@ -1,9 +1,16 @@
 package pl.wojtek;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class Input {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner;
+    public Input(InputStream in) {
+        scanner = new Scanner(System.in);
+    }
+
+
+    //= new Scanner(System.in);
 
 
     // znak % jest używany jako znacznik przy zapisywaniu plików więc nie jest dopuszczalny do wproadzenia
@@ -87,7 +94,7 @@ public class Input {
     }
 
 
-    public String getMenuItem() {
+    public String getMenuItem(Scanner scanner) {
         return scanner.nextLine();
     }
 }

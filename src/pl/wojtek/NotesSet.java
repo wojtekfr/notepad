@@ -6,7 +6,7 @@ import java.util.List;
 public class NotesSet {
     private List<Notes> notesList = new ArrayList<Notes>();
     private Notes currentNotes;
-    private Input input = new Input();
+    private Input input = new Input(System.in);
     private NotesSetPrinter notesSetPrinter = new NotesSetPrinter();
 
 

@@ -80,7 +80,7 @@ public class Search {
 
     // dodaje wyszukiwarki stwożone przez użytkownika. Nie są one tworzone na bazie osobnej klasy ale poprzez strumień
     public void addNewSearcherByKey() {
-        Input input = new Input();
+        Input input = new Input(System.in);
         try {
             String searcherKey = input.enterString("Enter searcher name");
 
@@ -95,7 +95,7 @@ public class Search {
     }
 
     public void addNewSearcherByValue() {
-        Input input = new Input();
+        Input input = new Input(System.in);
         try {
             String searcherKey = input.enterString("Enter searcher name");
             String searcherRule = input.enterString("Enter string to search for");
