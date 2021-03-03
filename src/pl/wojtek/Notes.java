@@ -12,16 +12,24 @@ public class Notes {
     private int numberOfLettersInAllAnnotations;
 
     Input input = new Input(System.in);
+
+
+
     NotesPrinter notesPrinter = new NotesPrinter(this);
     Search search = new Search(this);
 
 
-    // te dwa setery tylko na potrzeby podmiany inputa i seracha na mocki w testach
+    // te 3 setery tylko na potrzeby podmiany inputa, printera i searcha na mocki w testach
     public void setInput(Input input) {
         this.input = input;
     }
+
     public void setSearch(Search search) {
         this.search = search;
+    }
+
+    public void setNotesPrinter(NotesPrinter notesPrinter) {
+        this.notesPrinter = notesPrinter;
     }
 
     public Notes(String notesName) {
@@ -88,7 +96,7 @@ public class Notes {
     public void removeNote() {
         System.out.println("Enter key for notes to be removed");
         String key = input.enterKey();
-        if (!notes.keySet().contains(key)) {
+        if (!this.checkIfNoteExists(key)) {
             System.out.println("Key not found");
             return;
         }
@@ -118,11 +126,19 @@ public class Notes {
 
     public void editNote() {
         String key = input.enterKey();
-        if (!notes.keySet().contains(key)) {
+        if (this.checkIfNoteExists(key)) {
+            notes.put(key, input.enterValue());
+        } else {
             System.out.println("Key not found");
-            return;
         }
-        notes.put(key, input.enterValue());
+    }
+
+
+    public boolean checkIfNoteExists(String key) {
+        if (notes.keySet().contains(key)) {
+            return true;
+        }
+        return false;
     }
 
     // metody poniżej służą tylko skaskadowaniu poleceń dotyczących wyszukiwania lub drukowania do instancji Search albo NotesPrinter

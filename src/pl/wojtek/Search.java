@@ -94,6 +94,11 @@ public class Search {
         }
     }
 
+    public void addNewExistingSearcher(String key,Searcher searcher) {
+
+        searchers.put(key, searcher);
+    }
+
     public void addNewSearcherByValue() {
         Input input = new Input(System.in);
         try {

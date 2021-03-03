@@ -14,6 +14,7 @@ public class NotesTest {
     Annotation mockAnnotation, mockAnnotation1;
     Input mockInput;
     Search mockSearch;
+    NotesPrinter mockNotesPrinter;
 
     @Before
     public void initTests() {
@@ -21,7 +22,9 @@ public class NotesTest {
         mockAnnotation = mock(Annotation.class);
         mockAnnotation1 = mock(Annotation.class);
         mockInput = mock(Input.class);
-        mockSearch = mock(Search.class);}
+        mockSearch = mock(Search.class);
+        mockNotesPrinter = mock(NotesPrinter.class);
+    }
 
     @Test
     public void testUpdateNumberOfLettersinAllAnnotations() {
@@ -56,10 +59,36 @@ public class NotesTest {
         Assert.assertEquals(notes.getAnnotations().get(notes.getAnnotations().size() - 1).getAnnotation(), "test");
     }
 
+
     @Test
     public void testCreateNewAnnotation() {
         notes.createNewAnnotation("testowa");
         Assert.assertEquals(notes.getAnnotations().get(0).getAnnotation(), "testowa");
+    }
+
+    @Test
+    public void testCreateNewAnnotationThatIsNotCorrectFromUserInput() {
+        expect(mockInput.enterString("annotation")).andThrow(new IllegalArgumentException("exception message"));
+        replay(mockInput);
+        notes.createNewAnnotation(mockInput);
+        //Assert.assertEquals(null, notes.getAnnotations().get(0).getAnnotation());
+    }
+
+
+
+    @Test
+    public void testCreateNewAnnotationFromUserInput() {
+        notes.setInput(mockInput);
+        expect(mockInput.enterString("annotation")).andReturn("annotation text");
+        replay(mockInput);
+        notes.createNewAnnotation(mockInput);
+        Assert.assertEquals(notes.getAnnotations().get(0).getAnnotation(), "annotation text");
+        verify(mockInput);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateIncorrectNewAnnotation() {
+        notes.createNewAnnotation("e%w");
     }
 
     @Test
@@ -71,19 +100,6 @@ public class NotesTest {
         Assert.assertEquals(notes.getNotes(), map);
     }
 
-    @Test
-    public void testCreateNewAnnotationFromUserInput() {
-        expect(mockInput.enterString("annotation")).andReturn("www");
-        replay(mockInput);
-        notes.createNewAnnotation(mockInput);
-        Assert.assertEquals(notes.getAnnotations().get(0).getAnnotation(), "www");
-        verify(mockInput);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateIncorrectNewAnnotation() {
-        notes.createNewAnnotation("e%w");
-    }
 
     @Test
     public void testCreateIncorrectNewAnnotationFromUserInput() {
@@ -126,17 +142,41 @@ public class NotesTest {
         verify(mockInput);
     }
 
-    public void testTestGetNotes() {
-    }
 
-    public void testSetNotes() {
-    }
-
-    public void testAddNewNoteEnteredByUser() {
-    }
-
+    @Test
     public void testRemoveNote() {
+        notes.setInput(mockInput);
+        notes.addNote("klucz", "jakas wartosc");
+        expect(mockInput.enterKey()).andReturn("klucz");
+        expect(mockInput.askForDecision()).andReturn(true);
+        replay(mockInput);
+        notes.removeNote();
+        Assert.assertEquals(null,notes.getSpecificNote("klucz"));
+        verify(mockInput);
     }
+
+    @Test
+    public void testRemoveNoteThatDoNotExist() {
+        notes.setInput(mockInput);
+        notes.addNote("klucz", "jakas wartosc");
+        expect(mockInput.enterKey()).andReturn("xklucz");
+        replay(mockInput);
+        notes.removeNote();
+        verify(mockInput);
+    }
+
+    @Test
+    public void testRemoveNoteUserDoNotConfirm() {
+        notes.setInput(mockInput);
+        notes.addNote("klucz", "jakas wartosc");
+        expect(mockInput.enterKey()).andReturn("klucz");
+        expect(mockInput.askForDecision()).andReturn(false);
+        replay(mockInput);
+        notes.removeNote();
+        Assert.assertEquals("jakas wartosc",notes.getSpecificNote("klucz"));
+        verify(mockInput);
+    }
+
 
     public void testGetSpecificNote() {
     }
@@ -182,6 +222,7 @@ public class NotesTest {
         notes.searchAll();
         verify(mockSearch);
     }
+
     @Test
     public void testShowSearchers() {
         notes.setSearch(mockSearch);
@@ -192,6 +233,7 @@ public class NotesTest {
         verify(mockSearch);
 
     }
+
     @Test
     public void testAddNewSearcherByKey() {
         notes.setSearch(mockSearch);
@@ -201,6 +243,7 @@ public class NotesTest {
         notes.addNewSearcherByKey();
         verify(mockSearch);
     }
+
     @Test
     public void testAddNewSearcherByValue() {
         notes.setSearch(mockSearch);
@@ -211,6 +254,13 @@ public class NotesTest {
         verify(mockSearch);
     }
 
+    @Test
     public void testPrintNotes() {
+        notes.setNotesPrinter(mockNotesPrinter);
+        mockNotesPrinter.printNotes();
+        expectLastCall();
+        replay(mockNotesPrinter);
+        notes.printNotes();
+        verify(mockNotesPrinter);
     }
 }
