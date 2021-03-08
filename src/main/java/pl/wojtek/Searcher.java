@@ -2,7 +2,8 @@ package pl.wojtek;
 
 import java.util.List;
 
-public interface Searcher {
+public interface
+Searcher {
     String searcherName = null;
 
     //public String getSearcherName();

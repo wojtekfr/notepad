@@ -1,8 +1,10 @@
-package pl.wojtek;
+package test.pl.wojtek;
 
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
+import pl.wojtek.IOOperations;
+import pl.wojtek.NotesSet;
 
 import java.io.File;
 

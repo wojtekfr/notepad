@@ -1,8 +1,9 @@
-package pl.wojtek;
+package test.pl.wojtek;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import pl.wojtek.Annotation;
 
 public class AnnotationTest {
 
