@@ -1,9 +1,8 @@
-package test.pl.wojtek;
+package pl.wojtek;
 
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
-import pl.wojtek.*;
 
 import java.util.ArrayList;
 
