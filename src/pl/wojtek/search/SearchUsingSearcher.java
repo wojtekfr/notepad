@@ -1,4 +1,7 @@
-package pl.wojtek;
+package pl.wojtek.search;
+
+import pl.wojtek.Input;
+import pl.wojtek.Notes;
 
 import java.util.ArrayList;
 import java.util.HashMap;

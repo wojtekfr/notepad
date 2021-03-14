@@ -1,4 +1,6 @@
-package pl.wojtek;
+package pl.wojtek.search;
+
+import pl.wojtek.Notes;
 
 import java.util.List;
 

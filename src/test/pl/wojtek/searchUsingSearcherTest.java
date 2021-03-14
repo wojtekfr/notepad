@@ -2,6 +2,8 @@ package pl.wojtek;
 
 import junit.framework.TestCase;
 import org.junit.Test;
+import pl.wojtek.search.SearchUsingSearcher;
+import pl.wojtek.search.Searcher;
 
 import java.util.ArrayList;
 

@@ -3,6 +3,7 @@ package pl.wojtek;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import pl.wojtek.search.SearchUsingSearcher;
 
 import java.util.HashMap;
 import java.util.Map;

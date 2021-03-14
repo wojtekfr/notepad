@@ -1,5 +1,8 @@
 package pl.wojtek;
 
+import pl.wojtek.search.SearchUsingSearcher;
+import pl.wojtek.search.SimpleSearch;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
