@@ -28,7 +28,7 @@ public class Main {
         NotesSet notesSet = new NotesSet();
 
         // tworzy pierwszą instancję Notes - aplikacja musi mieć przynajmniej jedną
-        Notes defaultNotes = new Notes("Default");
+        Notes defaultNotes = new Notes("default");
         notesSet.addNotesToSet(defaultNotes);
 
         // iOOperations działa zawsze na całym NotesSet więc tworzony jest dopiero tutaj, podając notesSet w konstruktorze
@@ -39,24 +39,28 @@ public class Main {
         notesSet.setCurrentNotes(defaultNotes);
 
         // test data
-        notesSet.getCurrentNotes().addNote("inna notka", "treść inej notatki");
-        notesSet.getCurrentNotes().addNote("My telephone", "555 555 555");
-        notesSet.getCurrentNotes().addNote("Wife birthday", "01.01.1980");
-        notesSet.getCurrentNotes().addNote("inn", "wwww");
-        notesSet.getCurrentNotes().addNote("wife inna tel", "podwójna");
-        notesSet.getCurrentNotes().addNote("strumien", "ze strumienia");
-        notesSet.getCurrentNotes().createNewAnnotation("super głupia anotacja");
-        notesSet.getCurrentNotes().createNewAnnotation("test annotation");
-        notesSet.getCurrentNotes().createNewAnnotation("ww");
-        notesSet.getCurrentNotes().createNewAnnotation("cc");
 
+        notesSet.getCurrentNotes().addNote("car plate", "WF112233");
+        notesSet.getCurrentNotes().addNote("John's phone", "555 555 551");
+        notesSet.getCurrentNotes().createNewAnnotation("test annotation");
+
+        Notes newNoteSet = new Notes("drugi");
+        notesSet.addNotesToSet(newNoteSet);
+        notesSet.setCurrentNotes(newNoteSet);
+        notesSet.getCurrentNotes().addNote("superbank login", "mylogin");
+        notesSet.getCurrentNotes().addNote("my telephone", "555 555 555");
+        notesSet.getCurrentNotes().addNote("wife birthday", "01.01.1980");
+        notesSet.getCurrentNotes().addNote("wife phone", "555 555 666");
+        notesSet.getCurrentNotes().addNote("stream", "note to be found using stream");
+        notesSet.getCurrentNotes().createNewAnnotation("first annotation");
+        notesSet.getCurrentNotes().createNewAnnotation("second annotation");
 
 
         // main loop
         boolean needToExit = false;
         do {
             menuPrinter.printMenu();
-            switch (input.getMenuItem(scanner)) {
+            switch (input.getMenuItem()) {
                 case "1":
                     notesSet.getCurrentNotes().printNotes();
                     break;
@@ -102,15 +106,18 @@ public class Main {
                     iOOperations.load();
                     break;
                 case "13":
-                    notesSet.getCurrentNotes().searchAll();
+                    notesSet.getCurrentNotes().executeSimpleSearch();
                     break;
                 case "14":
-                    notesSet.getCurrentNotes().showSearchers();
+                    notesSet.getCurrentNotes().runAllExistingSearchers();
                     break;
                 case "15":
-                    notesSet.getCurrentNotes().addNewSearcherByKey();
+                    notesSet.getCurrentNotes().showSearchers();
                     break;
                 case "16":
+                    notesSet.getCurrentNotes().addNewSearcherByKey();
+                    break;
+                case "17":
                     notesSet.getCurrentNotes().addNewSearcherByValue();
                     break;
                 case "0":

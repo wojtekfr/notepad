@@ -10,13 +10,10 @@ public class Notes {
     private Map<String, String> notes;
     private ArrayList<Annotation> annotations;
     private int numberOfLettersInAllAnnotations;
-
-    Input input = new Input(System.in);
-
-
-
-    NotesPrinter notesPrinter = new NotesPrinter(this);
-    Search search = new Search(this);
+    private Input input = new Input(System.in);
+    private NotesPrinter notesPrinter = new NotesPrinter(this);
+    private SearchUsingSearcher searchUsingSearcher = new SearchUsingSearcher(this);
+    private SimpleSearch simpleSearch = new SimpleSearch(this);
 
 
     // te 3 setery tylko na potrzeby podmiany inputa, printera i searcha na mocki w testach
@@ -24,8 +21,8 @@ public class Notes {
         this.input = input;
     }
 
-    public void setSearch(Search search) {
-        this.search = search;
+    public void setSearch(SearchUsingSearcher searchUsingSearcher) {
+        this.searchUsingSearcher = searchUsingSearcher;
     }
 
     public void setNotesPrinter(NotesPrinter notesPrinter) {
@@ -142,20 +139,20 @@ public class Notes {
     }
 
     // metody poniżej służą tylko skaskadowaniu poleceń dotyczących wyszukiwania lub drukowania do instancji Search albo NotesPrinter
-    public void searchAll() {
-        search.searchAll();
+    public void runAllExistingSearchers() {
+        searchUsingSearcher.searchAll();
     }
 
     public void showSearchers() {
-        search.showSearchers();
+        searchUsingSearcher.showSearchers();
     }
 
     public void addNewSearcherByKey() {
-        search.addNewSearcherByKey();
+        searchUsingSearcher.addNewSearcherByKey();
     }
 
     public void addNewSearcherByValue() {
-        search.addNewSearcherByValue();
+        searchUsingSearcher.addNewSearcherByValue();
     }
 
     public void printNotes() {
@@ -163,4 +160,7 @@ public class Notes {
     }
 
 
+    public void executeSimpleSearch() {
+        simpleSearch.executeSimpleSearch();
+    }
 }

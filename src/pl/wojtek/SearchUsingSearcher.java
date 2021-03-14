@@ -6,19 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Search {
+public class SearchUsingSearcher {
 
     Map<String, Searcher> searchers = new HashMap<>();
     Notes notesForSearching;
 
 
 
-    public Search(Notes notesForSearching) {
+    public SearchUsingSearcher(Notes notesForSearching) {
         this.notesForSearching = notesForSearching;
         // predefiniowane wyszukiwarki są mało użyteczne, ale zostały dodane w celu przećwiczenia różnych sposobów ich tworzenia
 
         // dodaj wyszukiwarkę zdefiniowaną w osobnej klasie
-        SearcherByKey searcherByKey = new SearcherByKey("inn");
+        SearcherByKey searcherByKey = new SearcherByKey("tel");
         searchers.put("searcher from normal class", searcherByKey);
 
         // dodaj wyszukiwarkę zdefiniowaną w klasie anonimowej
@@ -28,7 +28,7 @@ public class Search {
             public List<String> findNotes(Notes notes) {
                 List<String> foundKeys = new ArrayList<>();
                 for (String keyToFind : notes.getNotes().keySet()) {
-                    if (keyToFind.toLowerCase().contains("wife")) {
+                    if (keyToFind.toLowerCase().contains("login")) {
                         foundKeys.add(keyToFind);
                     }
                 }
@@ -40,7 +40,7 @@ public class Search {
         searchers.put("searcher from lambda", (notes1) -> {
             List<String> foundKeys = new ArrayList<>();
             for (String keyToFind : notes1.getNotes().keySet()) {
-                if (keyToFind.toLowerCase().contains("tel")) {
+                if (keyToFind.toLowerCase().contains("wife")) {
                     foundKeys.add(keyToFind);
                 }
             }
@@ -50,13 +50,13 @@ public class Search {
         // dodaj wyszukiwarkę zdefiniowaną jako strumień
 
         searchers.put("searcher from stream", notes2 -> notes2.getNotes().keySet().stream()
-                .filter(note -> note.contains("tel"))
+                .filter(note -> note.contains("phone"))
                 .filter(note -> note.contains("wife"))
                 .collect(Collectors.toList()));
 
         // wyszukowarka jako strumień, dodatkowo zmieniająca wartość każdego wywiltrowanego elementu (na duże znaki)
         searchers.put("searcher from stream with mapping", notes2 -> notes2.getNotes().keySet().stream()
-                .filter(note -> note.contains("tel"))
+                .filter(note -> note.contains("phone"))
                 .filter(note -> note.contains("wife"))
                 .map(note -> note.toUpperCase())
                 .collect(Collectors.toList()));

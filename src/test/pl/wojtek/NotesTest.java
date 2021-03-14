@@ -13,7 +13,7 @@ public class NotesTest {
     Notes notes;
     Annotation mockAnnotation, mockAnnotation1;
     Input mockInput;
-    Search mockSearch;
+    SearchUsingSearcher mockSearchUsingSearcher;
     NotesPrinter mockNotesPrinter;
 
     @Before
@@ -22,7 +22,7 @@ public class NotesTest {
         mockAnnotation = mock(Annotation.class);
         mockAnnotation1 = mock(Annotation.class);
         mockInput = mock(Input.class);
-        mockSearch = mock(Search.class);
+        mockSearchUsingSearcher = mock(SearchUsingSearcher.class);
         mockNotesPrinter = mock(NotesPrinter.class);
     }
 
@@ -215,43 +215,43 @@ public class NotesTest {
 
     @Test
     public void testSearchAll() {
-        notes.setSearch(mockSearch);
-        mockSearch.searchAll();
+        notes.setSearch(mockSearchUsingSearcher);
+        mockSearchUsingSearcher.searchAll();
         expectLastCall();
-        replay(mockSearch);
-        notes.searchAll();
-        verify(mockSearch);
+        replay(mockSearchUsingSearcher);
+        notes.runAllExistingSearchers();
+        verify(mockSearchUsingSearcher);
     }
 
     @Test
     public void testShowSearchers() {
-        notes.setSearch(mockSearch);
-        mockSearch.showSearchers();
+        notes.setSearch(mockSearchUsingSearcher);
+        mockSearchUsingSearcher.showSearchers();
         expectLastCall();
-        replay(mockSearch);
+        replay(mockSearchUsingSearcher);
         notes.showSearchers();
-        verify(mockSearch);
+        verify(mockSearchUsingSearcher);
 
     }
 
     @Test
     public void testAddNewSearcherByKey() {
-        notes.setSearch(mockSearch);
-        mockSearch.addNewSearcherByKey();
+        notes.setSearch(mockSearchUsingSearcher);
+        mockSearchUsingSearcher.addNewSearcherByKey();
         expectLastCall();
-        replay(mockSearch);
+        replay(mockSearchUsingSearcher);
         notes.addNewSearcherByKey();
-        verify(mockSearch);
+        verify(mockSearchUsingSearcher);
     }
 
     @Test
     public void testAddNewSearcherByValue() {
-        notes.setSearch(mockSearch);
-        mockSearch.addNewSearcherByValue();
+        notes.setSearch(mockSearchUsingSearcher);
+        mockSearchUsingSearcher.addNewSearcherByValue();
         expectLastCall();
-        replay(mockSearch);
+        replay(mockSearchUsingSearcher);
         notes.addNewSearcherByValue();
-        verify(mockSearch);
+        verify(mockSearchUsingSearcher);
     }
 
     @Test

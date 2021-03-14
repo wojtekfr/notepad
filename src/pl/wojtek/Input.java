@@ -94,7 +94,7 @@ public class Input {
     }
 
 
-    public String getMenuItem(Scanner scanner) {
+    public String getMenuItem() {
         return scanner.nextLine();
     }
 }
