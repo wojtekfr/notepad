@@ -1,14 +1,14 @@
-package pl.wojtek.search;
+package pl.wojtek.advancedSearch;
 
 import java.util.List;
 
-public class SearchResultsPrinter {
+public class AdvancedSearchResultsPrinter {
     private String searcherKey;
     private List<String> results;
 
 
 
-    public SearchResultsPrinter(String searcherKey, List<String> results) {
+    public AdvancedSearchResultsPrinter(String searcherKey, List<String> results) {
         this.searcherKey = searcherKey;
         this.results = results;
     }

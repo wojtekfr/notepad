@@ -21,7 +21,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // tworzy niezbędne obiekty wykorzystywanych klas
         Input input = new Input(System.in);
-        Scanner scanner = new Scanner(System.in);
         MenuPrinter menuPrinter = new MenuPrinter();
 
         // tworzy jedyną instancję NotesSet
@@ -56,15 +55,12 @@ public class Main {
         notesSet.getCurrentNotes().createNewAnnotation("second annotation");
 
 
-        // main loop
+        // pętla z głównym menu
         boolean needToExit = false;
         do {
             menuPrinter.printMenu();
             switch (input.getMenuItem()) {
                 case "1":
-                    notesSet.getCurrentNotes().printNotes();
-                    break;
-                case "2":
                     // tu mam zgryz. Żeby z maina wywołać metodę na konretnej instancji Notes, muszę najpierw pobrać tą instancję z notesSet
                     // pytanie czy to eleganckie rozwiązanie. Z poziomu maina pewnie byłoby lepiej mieć tą metodę w notesSet, która by przekazywała
                     // polecenie druku, niżej, do konkretnej instancji Notes. Ale to by powodowało koniecznośc posiadania w notesSet zestawu metod,
@@ -72,6 +68,9 @@ public class Main {
                     // Zrobiłem tak za to, w Notes dla Search i NotesPrinter, bo tam żeby wywołać drukowanie z main, trzeba by
                     // pobrać instancję Notes z NotesSet, a potem dla tego Notes, pobrać NotesPrinter - to już za długi łańcuszek.
                     // ale nie wygląda mi to na zgrabne rozwiązanie, więc pewnie jest lepszy sposób
+                    notesSet.getCurrentNotes().printNotes();
+                    break;
+                case "2":
                     notesSet.getCurrentNotes().addNewNoteEnteredByUser();
                     break;
                 case "3":
@@ -106,20 +105,12 @@ public class Main {
                     iOOperations.load();
                     break;
                 case "13":
-                    notesSet.getCurrentNotes().executeSimpleSearch();
+                    notesSet.getCurrentNotes().selectSimpleSearchOperation();
                     break;
                 case "14":
-                    notesSet.getCurrentNotes().runAllExistingSearchers();
+                    notesSet.getCurrentNotes().selectAdvancedSearchOperation();
                     break;
-                case "15":
-                    notesSet.getCurrentNotes().showSearchers();
-                    break;
-                case "16":
-                    notesSet.getCurrentNotes().addNewSearcherByKey();
-                    break;
-                case "17":
-                    notesSet.getCurrentNotes().addNewSearcherByValue();
-                    break;
+
                 case "0":
                     System.out.println("Goodbye");
                     needToExit = true;

@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class Input {
     Scanner scanner;
+
+    //TODO do zastanowienia czy definiowanie inputstream jest potrzebne, chyba jednak tego nigdzie w testach nie wykorzystam
     public Input(InputStream in) {
         scanner = new Scanner(System.in);
     }
 
-
-    //= new Scanner(System.in);
 
 
     // znak % jest używany jako znacznik przy zapisywaniu plików więc nie jest dopuszczalny do wproadzenia

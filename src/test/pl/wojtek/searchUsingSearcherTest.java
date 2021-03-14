@@ -2,8 +2,8 @@ package pl.wojtek;
 
 import junit.framework.TestCase;
 import org.junit.Test;
-import pl.wojtek.search.SearchUsingSearcher;
-import pl.wojtek.search.Searcher;
+import pl.wojtek.advancedSearch.SearchUsingSearcher;
+import pl.wojtek.advancedSearch.Searcher;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class searchUsingSearcherTest extends TestCase {
         expect(mockSearcher1.findNotes(notes)).andReturn(testList1);
         replay(mockSearcher);
         replay(mockSearcher1);
-        searchUsingSearcher.searchAll();
+        searchUsingSearcher.runAllExistingSearchers();
         verify(mockSearcher);
         verify(mockSearcher1);
 

@@ -1,4 +1,4 @@
-package pl.wojtek.search;
+package pl.wojtek.advancedSearch;
 
 import pl.wojtek.Input;
 import pl.wojtek.Notes;
@@ -13,7 +13,41 @@ public class SearchUsingSearcher {
 
     Map<String, Searcher> searchers = new HashMap<>();
     Notes notesForSearching;
+    Input input = new Input(System.in);
 
+    public void selectAdvancedSearchOperation() {
+        boolean needToExit = false;
+        do {
+            System.out.println();
+            System.out.println("Advanced search is an experimental function to practice different ways of adding searchers method");
+            System.out.println("It includes predefined searchers created in different ways like lambda or streams. User can also add new searchers manually");
+            System.out.println("It is not very functional, in practice better use simple search");
+            System.out.println("Select:");
+            System.out.println("1 - run all existing searchers");
+            System.out.println("2 - show list of existing searchers");
+            System.out.println("3 - add new searcher by key");
+            System.out.println("4 - add new searcher by value");
+            System.out.println("0 - exit to main menu");
+            switch (input.getMenuItem()) {
+                case "1":
+                    runAllExistingSearchers();
+                    break;
+                case "2":
+                    showSearchers();
+                    break;
+                case "3":
+                    addNewSearcherByKey();
+                    break;
+                case "4":
+                    addNewSearcherByValue();
+                    break;
+                case "0":
+                    needToExit = true;
+                    break;
+            }
+        } while (!needToExit);
+
+    }
 
 
     public SearchUsingSearcher(Notes notesForSearching) {
@@ -65,13 +99,13 @@ public class SearchUsingSearcher {
                 .collect(Collectors.toList()));
     }
 
-    public void searchAll() {
+    public void runAllExistingSearchers() {
         // iteruje przez wszystkie wyszukiwarki wykonująć wyszukanie wg reguł zdefiniowanych w ich instancjach
         for (String searcherKey : searchers.keySet()) {
             Searcher searcher = searchers.get(searcherKey);
             List<String> searchResults = searcher.findNotes(notesForSearching);
-            SearchResultsPrinter searchResultsPrinter = new SearchResultsPrinter(searcherKey, searchResults);
-            searchResultsPrinter.printResults();
+            AdvancedSearchResultsPrinter advancedSearchResultsPrinter = new AdvancedSearchResultsPrinter(searcherKey, searchResults);
+            advancedSearchResultsPrinter.printResults();
         }
     }
 

@@ -1,4 +1,4 @@
-package pl.wojtek.search;
+package pl.wojtek.simpleSearch;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -17,10 +17,10 @@ public class MenuPrinter {
         System.out.println("11 - save note set");
         System.out.println("12 - load note set");
         System.out.println("13 - simple search by value or key");
-        System.out.println("14 - run all existing searchers");
-        System.out.println("15 - show list of existing searchers");
-        System.out.println("16 - add new searcher by key");
-        System.out.println("17 - add new searcher by value");
+        System.out.println("14 - advanced searchers menu");
+//        System.out.println("15 - show list of existing searchers");
+//        System.out.println("16 - add new searcher by key");
+//        System.out.println("17 - add new searcher by value");
         System.out.println("0 - exit");
     }
 }

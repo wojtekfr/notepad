@@ -1,7 +1,7 @@
 package pl.wojtek;
 
-import pl.wojtek.search.SearchUsingSearcher;
-import pl.wojtek.search.SimpleSearch;
+import pl.wojtek.advancedSearch.SearchUsingSearcher;
+import pl.wojtek.simpleSearch.SimpleSearch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -142,28 +142,18 @@ public class Notes {
     }
 
     // metody poniżej służą tylko skaskadowaniu poleceń dotyczących wyszukiwania lub drukowania do instancji Search albo NotesPrinter
-    public void runAllExistingSearchers() {
-        searchUsingSearcher.searchAll();
-    }
 
-    public void showSearchers() {
-        searchUsingSearcher.showSearchers();
-    }
+   public void selectAdvancedSearchOperation(){
+        searchUsingSearcher.selectAdvancedSearchOperation();
+   }
 
-    public void addNewSearcherByKey() {
-        searchUsingSearcher.addNewSearcherByKey();
-    }
-
-    public void addNewSearcherByValue() {
-        searchUsingSearcher.addNewSearcherByValue();
-    }
 
     public void printNotes() {
         notesPrinter.printNotes();
     }
 
 
-    public void executeSimpleSearch() {
-        simpleSearch.executeSimpleSearch();
+    public void selectSimpleSearchOperation() {
+        simpleSearch.selectSimpleSearchOperation();
     }
 }

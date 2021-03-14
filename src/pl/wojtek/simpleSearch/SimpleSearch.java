@@ -1,4 +1,4 @@
-package pl.wojtek.search;
+package pl.wojtek.simpleSearch;
 
 import pl.wojtek.Input;
 import pl.wojtek.Notes;
@@ -18,7 +18,7 @@ public class SimpleSearch {
 
     }
 
-    public void executeSimpleSearch() {
+    public void selectSimpleSearchOperation() {
         int typeOfSearch = selectTypeOfSearch();
         if (typeOfSearch == 0) {
             return;

@@ -1,4 +1,4 @@
-package pl.wojtek.search;
+package pl.wojtek.advancedSearch;
 
 import pl.wojtek.Notes;
 
