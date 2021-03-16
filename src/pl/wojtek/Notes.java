@@ -11,37 +11,31 @@ public class Notes {
 
     private String notesName;
     private Map<String, String> notes;
-    private ArrayList<Annotation> annotations;
+    private final ArrayList<Annotation> annotations;
     private int numberOfLettersInAllAnnotations;
-    private Input input = new Input(System.in);
+    private Input input = new Input();
     private NotesPrinter notesPrinter = new NotesPrinter(this);
-    private SearchUsingSearcher searchUsingSearcher = new SearchUsingSearcher(this);
-    private SimpleSearch simpleSearch = new SimpleSearch(this);
+    private final SearchUsingSearcher searchUsingSearcher = new SearchUsingSearcher(this);
+    private final SimpleSearch simpleSearch = new SimpleSearch(this);
 
-
-    // te 3 setery tylko na potrzeby podmiany inputa, printera i searcha na mocki w testach
-    public void setInput(Input input) {
-        this.input = input;
+    public Notes(String notesName) {
+        this.notesName = notesName;
+        annotations = new ArrayList<>();
+        notes = new HashMap<>();
     }
 
-    public void setSearch(SearchUsingSearcher searchUsingSearcher) {
-        this.searchUsingSearcher = searchUsingSearcher;
+    // te 2 setery tylko na potrzeby podmiany inputa i printera  na mocki w testach
+    public void setInput(Input input) {
+        this.input = input;
     }
 
     public void setNotesPrinter(NotesPrinter notesPrinter) {
         this.notesPrinter = notesPrinter;
     }
 
-    public Notes(String notesName) {
-        this.notesName = notesName;
-        annotations = new ArrayList<>();
-        notes = new HashMap<String, String>();
-    }
-
     public int getNumberOfLettersInAllAnnotations() {
         return numberOfLettersInAllAnnotations;
     }
-
 
     public void updateNumberOfLettersInAllAnnotations() {
         int numberOfLetters = 0;
@@ -55,7 +49,7 @@ public class Notes {
         return annotations;
     }
 
-    public void createNewAnnotation(Input input) {
+    public void createNewAnnotation() {
         try {
             Annotation annotation = new Annotation(input.enterString("annotation"));
             annotations.add(annotation);
@@ -64,13 +58,13 @@ public class Notes {
         }
     }
 
+    // tylko na potrzeby tworzenia testowych danych opcja podania treści jako parametr
     public void createNewAnnotation(String annotationText) {
         if (annotationText.contains("%")) {
             throw new IllegalArgumentException();
         }
         Annotation annotation = new Annotation(annotationText);
         annotations.add(annotation);
-
     }
 
     public void addAnnotation(Annotation annotation) {
@@ -98,22 +92,21 @@ public class Notes {
         String key = input.enterKey();
         if (!this.checkIfNoteExists(key)) {
             System.out.println("Key not found");
-            return;
-        }
-        System.out.println("Do you really whant to remove note: " + key + " " + notes.get(key));
-        boolean decision = input.askForDecision();
-        if (decision) {
-            notes.remove(key);
-            System.out.println("Note removed");
         } else {
-            System.out.println("Note not removed");
+            System.out.println("Do you really whant to remove note: " + key + " " + notes.get(key));
+            boolean decision = input.askForDecision();
+            if (decision) {
+                notes.remove(key);
+                System.out.println("Note removed");
+            } else {
+                System.out.println("Note not removed");
+            }
         }
     }
 
     public String getSpecificNote(String key) {
         return notes.get(key);
     }
-
 
     public String getNotesName() {
         return notesName;
@@ -122,7 +115,6 @@ public class Notes {
     public void setNotesName(String notesName) {
         this.notesName = notesName;
     }
-
 
     public void editNote() {
         String key = input.enterKey();
@@ -135,23 +127,18 @@ public class Notes {
 
 
     public boolean checkIfNoteExists(String key) {
-        if (notes.keySet().contains(key)) {
-            return true;
-        }
-        return false;
+        return notes.containsKey(key);
     }
 
     // metody poniżej służą tylko skaskadowaniu poleceń dotyczących wyszukiwania lub drukowania do instancji Search albo NotesPrinter
-
-   public void selectAdvancedSearchOperation(){
-        searchUsingSearcher.selectAdvancedSearchOperation();
-   }
-
 
     public void printNotes() {
         notesPrinter.printNotes();
     }
 
+    public void selectAdvancedSearchOperation() {
+        searchUsingSearcher.selectAdvancedSearchOperation();
+    }
 
     public void selectSimpleSearchOperation() {
         simpleSearch.selectSimpleSearchOperation();

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class IOOperations {
     NotesSet notesSet;
     String token;
-    Input input = new Input(System.in);
+    Input input = new Input();
     File file = new File("notes.txt");
     String[] tokenSplitted;
 
@@ -34,7 +34,7 @@ public class IOOperations {
         }
     }
 
-    public void load() throws FileNotFoundException {
+    public void load()  {
         System.out.println("All current notes sets will be will be replaced with content of notes.txt");
         if (input.askForDecision()) {
             try {

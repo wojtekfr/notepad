@@ -1,7 +1,6 @@
 package pl.wojtek;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 // celem aplikacji jest przechowywanie notatek w dwóch formach - klucza i wartości (np do notowania ważnych dat)
 // oraz luźnych adnotacji (zwykłe pole tekstowe, dla niego dodatkowo dodawana jest automatycznie data dodana)
@@ -20,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         // tworzy niezbędne obiekty wykorzystywanych klas
-        Input input = new Input(System.in);
+        Input input = new Input();
         MenuPrinter menuPrinter = new MenuPrinter();
 
         // tworzy jedyną instancję NotesSet
@@ -43,7 +42,7 @@ public class Main {
         notesSet.getCurrentNotes().addNote("John's phone", "555 555 551");
         notesSet.getCurrentNotes().createNewAnnotation("test annotation");
 
-        Notes newNoteSet = new Notes("drugi");
+        Notes newNoteSet = new Notes("second");
         notesSet.addNotesToSet(newNoteSet);
         notesSet.setCurrentNotes(newNoteSet);
         notesSet.getCurrentNotes().addNote("superbank login", "mylogin");
@@ -63,7 +62,7 @@ public class Main {
                 case "1":
                     // tu mam zgryz. Żeby z maina wywołać metodę na konretnej instancji Notes, muszę najpierw pobrać tą instancję z notesSet
                     // pytanie czy to eleganckie rozwiązanie. Z poziomu maina pewnie byłoby lepiej mieć tą metodę w notesSet, która by przekazywała
-                    // polecenie druku, niżej, do konkretnej instancji Notes. Ale to by powodowało koniecznośc posiadania w notesSet zestawu metod,
+                    // polecenie druku, niżej, do konkretnej instancji Notes. Ale to by powodowało koniecznośc posiadania w NotesSet zestawu metod,
                     // które nic nie robią, poza wywołaniem tej samej metody niżej (w Notes).
                     // Zrobiłem tak za to, w Notes dla Search i NotesPrinter, bo tam żeby wywołać drukowanie z main, trzeba by
                     // pobrać instancję Notes z NotesSet, a potem dla tego Notes, pobrać NotesPrinter - to już za długi łańcuszek.
@@ -80,12 +79,12 @@ public class Main {
                     notesSet.getCurrentNotes().removeNote();
                     break;
                 case "5":
-                    notesSet.getCurrentNotes().createNewAnnotation(input);
+                    notesSet.getCurrentNotes().createNewAnnotation();
                     break;
                 case "6":
                     // mało użyteczne ale dodane na potrzeby ćwiczenia tworzenia testów
                     notesSet.getCurrentNotes().updateNumberOfLettersInAllAnnotations();
-                    System.out.println(notesSet.getCurrentNotes().getNumberOfLettersInAllAnnotations());
+                    System.out.println("Number of letter in all annotations: " +notesSet.getCurrentNotes().getNumberOfLettersInAllAnnotations());
                     break;
                 case "7":
                     notesSet.changeName();
@@ -110,7 +109,6 @@ public class Main {
                 case "14":
                     notesSet.getCurrentNotes().selectAdvancedSearchOperation();
                     break;
-
                 case "0":
                     System.out.println("Goodbye");
                     needToExit = true;

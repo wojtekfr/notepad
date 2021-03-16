@@ -1,16 +1,13 @@
 package pl.wojtek;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class Input {
     Scanner scanner;
 
-    //TODO do zastanowienia czy definiowanie inputstream jest potrzebne, chyba jednak tego nigdzie w testach nie wykorzystam
-    public Input(InputStream in) {
+    public Input() {
         scanner = new Scanner(System.in);
     }
-
 
 
     // znak % jest używany jako znacznik przy zapisywaniu plików więc nie jest dopuszczalny do wproadzenia
@@ -40,17 +37,13 @@ public class Input {
     }
 
     public boolean doesStringIncludesNotAllowedSymbol(String stringForChecking) {
-        if (stringForChecking.contains("%")) {
-            return true;
-        } else {
-            return false;
-        }
+        return stringForChecking.contains("%");
     }
 
 
     public String enterKey() {
         String key;
-        Boolean isKeyCorrect;
+        boolean isKeyCorrect;
         do {
             isKeyCorrect = true;
             System.out.print("Enter key: ");
@@ -72,7 +65,7 @@ public class Input {
 
     public String enterValue() {
         String value;
-        Boolean isValueCorrect;
+        boolean isValueCorrect;
 
         do {
             isValueCorrect = true;

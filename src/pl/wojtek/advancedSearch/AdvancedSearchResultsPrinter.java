@@ -3,8 +3,8 @@ package pl.wojtek.advancedSearch;
 import java.util.List;
 
 public class AdvancedSearchResultsPrinter {
-    private String searcherKey;
-    private List<String> results;
+    private final String searcherKey;
+    private final List<String> results;
 
 
 

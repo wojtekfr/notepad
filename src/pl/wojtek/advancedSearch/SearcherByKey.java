@@ -7,11 +7,6 @@ import java.util.List;
 
 public class SearcherByKey implements Searcher {
     String keyToFind;
-    String searcherName = "search by key";
-
-    public String getSearcherName() {
-        return searcherName;
-    }
 
     public SearcherByKey(String keyToFind) {
         this.keyToFind = keyToFind;

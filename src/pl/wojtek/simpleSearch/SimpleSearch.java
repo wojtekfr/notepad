@@ -9,8 +9,8 @@ import java.util.Map;
 public class SimpleSearch {
     private Map<String, String> simpleSearchResults = new HashMap<>();
     private Map<String, String> notes;
-    private Notes notesForSearching;
-    private Input input = new Input(System.in);
+    private final Notes notesForSearching;
+    private Input input = new Input();
 
 
     public SimpleSearch(Notes notesForSearching) {

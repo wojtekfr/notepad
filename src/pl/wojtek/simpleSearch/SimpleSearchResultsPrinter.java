@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class SimpleSearchResultsPrinter {
 
+    Map<String, String> simpleSearchResults;
+
     public SimpleSearchResultsPrinter(Map<String, String> simpleSearchResults) {
         this.simpleSearchResults = simpleSearchResults;
     }
-
-    Map<String, String> simpleSearchResults = new HashMap<>();
 
     public void printSimpleSearchResults() {
         if (simpleSearchResults.isEmpty()) {

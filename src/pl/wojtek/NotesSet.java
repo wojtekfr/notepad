@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotesSet {
-    private List<Notes> notesList = new ArrayList<Notes>();
+    private final List<Notes> notesList = new ArrayList<>();
     private Notes currentNotes;
-    private Input input = new Input(System.in);
-    private NotesSetPrinter notesSetPrinter = new NotesSetPrinter();
-
+    private final Input input = new Input();
+    private final NotesSetPrinter notesSetPrinter = new NotesSetPrinter();
 
     public Notes getCurrentNotes() {
         return currentNotes;
@@ -22,16 +21,9 @@ public class NotesSet {
         return notesList;
     }
 
-    public void setNotesList(List<Notes> notesList) {
-        this.notesList = notesList;
-    }
 
     public void addNotesToSet(Notes notes) {
         notesList.add(notes);
-    }
-
-    public void removeNotesFromSet(Notes notes) {
-        notesList.remove(notes);
     }
 
     public void newNotesSet() {
@@ -70,7 +62,6 @@ public class NotesSet {
             String name = input.enterString("new name");
             if (name.isEmpty()) {
                 System.out.println("Name not changed");
-                return;
             } else {
                 if (doesNoteSetExist(name)) {
                     System.out.println("Such notes set already exists");
@@ -79,12 +70,11 @@ public class NotesSet {
                 }
             }
         } catch (IllegalArgumentException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
     public boolean doesNoteSetExist(String proposedNotesSetName) {
-
         for (Notes notes : notesList) {
             if (notes.getNotesName().equals(proposedNotesSetName)) {
                 return true;

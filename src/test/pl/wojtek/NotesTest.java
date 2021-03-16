@@ -67,21 +67,24 @@ public class NotesTest {
         Assert.assertEquals(notes.getAnnotations().get(0).getAnnotation(), "testowa");
     }
 
-    //TODO check test
+
     @Test
     public void testCreateNewAnnotationThatIsNotCorrectFromUserInput() {
         expect(mockInput.enterString("annotation")).andThrow(new IllegalArgumentException("exception message"));
         replay(mockInput);
-        notes.createNewAnnotation(mockInput);
+        notes.setInput(mockInput);
+        notes.createNewAnnotation();
+        Assert.assertEquals(notes.getAnnotations().isEmpty(), true);
+        verify(mockInput);
     }
 
 
     @Test
     public void testCreateNewAnnotationFromUserInput() {
-        notes.setInput(mockInput);
-        expect(mockInput.enterString("annotation")).andReturn("annotation text");
+             expect(mockInput.enterString("annotation")).andReturn("annotation text");
         replay(mockInput);
-        notes.createNewAnnotation(mockInput);
+        notes.setInput(mockInput);
+        notes.createNewAnnotation();
         Assert.assertEquals(notes.getAnnotations().get(0).getAnnotation(), "annotation text");
         verify(mockInput);
     }
@@ -105,7 +108,9 @@ public class NotesTest {
     public void testCreateIncorrectNewAnnotationFromUserInput() {
         expect(mockInput.enterString("annotation")).andReturn("%");
         replay(mockInput);
-        notes.createNewAnnotation(mockInput);
+        notes.setInput(mockInput);
+        notes.createNewAnnotation();
+
         Assert.assertEquals(notes.getAnnotations().get(0).getAnnotation(), "%");
         System.out.println(notes.getAnnotations().get(0).getAnnotation());
         verify(mockInput);

@@ -7,11 +7,6 @@ public class NotesPrinter {
         this.notesForPrinting = notesForPrinting;
     }
 
-    public void setNotesForPrinting(Notes notesForPrinting) {
-        this.notesForPrinting = notesForPrinting;
-    }
-
-
 
     public void printNotes() {
         System.out.println("Your notes in " + notesForPrinting.getNotesName() + " :");

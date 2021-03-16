@@ -13,7 +13,7 @@ public class SearchUsingSearcher {
 
     Map<String, Searcher> searchers = new HashMap<>();
     Notes notesForSearching;
-    Input input = new Input(System.in);
+    Input input = new Input();
 
     public void selectAdvancedSearchOperation() {
         boolean needToExit = false;
@@ -29,21 +29,11 @@ public class SearchUsingSearcher {
             System.out.println("4 - add new searcher by value");
             System.out.println("0 - exit to main menu");
             switch (input.getMenuItem()) {
-                case "1":
-                    runAllExistingSearchers();
-                    break;
-                case "2":
-                    showSearchers();
-                    break;
-                case "3":
-                    addNewSearcherByKey();
-                    break;
-                case "4":
-                    addNewSearcherByValue();
-                    break;
-                case "0":
-                    needToExit = true;
-                    break;
+                case "1" -> runAllExistingSearchers();
+                case "2" -> showSearchers();
+                case "3" -> addNewSearcherByKey();
+                case "4" -> addNewSearcherByValue();
+                case "0" -> needToExit = true;
             }
         } while (!needToExit);
 
@@ -117,7 +107,7 @@ public class SearchUsingSearcher {
 
     // dodaje wyszukiwarki stwożone przez użytkownika. Nie są one tworzone na bazie osobnej klasy ale poprzez strumień
     public void addNewSearcherByKey() {
-        Input input = new Input(System.in);
+        Input input = new Input();
         try {
             String searcherKey = input.enterString("Enter searcher name");
 
@@ -137,7 +127,7 @@ public class SearchUsingSearcher {
     }
 
     public void addNewSearcherByValue() {
-        Input input = new Input(System.in);
+        Input input = new Input();
         try {
             String searcherKey = input.enterString("Enter searcher name");
             String searcherRule = input.enterString("Enter string to search for");

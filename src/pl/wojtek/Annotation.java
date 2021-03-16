@@ -4,8 +4,8 @@ package pl.wojtek;
 import java.text.SimpleDateFormat;
 
 public class Annotation {
-    private String annotation;
-    private String dateOfAdding;
+    private final String annotation;
+    private final String dateOfAdding;
 
     public Annotation(String annotation) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
